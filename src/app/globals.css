@@ -23,6 +23,7 @@
   );
 
   --tile-start-rgb: 239, 245, 249;
+  --title-active-rgb: 66, 133, 244;
   --tile-end-rgb: 228, 232, 233;
   --tile-border: conic-gradient(
     #00000080,
