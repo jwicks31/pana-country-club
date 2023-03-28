@@ -7,11 +7,11 @@ const MenuBar = () => {
   const pathname = usePathname();
   const menuItems = [
     { name: 'Home', link: '/' },
-    { name: 'Membership', link: '/membership' },
+    // { name: 'Membership', link: '/membership' },
     { name: 'About Us', link: '/about' },
     { name: 'Contact Us', link: '/contact' },
-    { name: 'Club House & Bar', link: '/clubhouse' },
-    { name: 'League Info', link: '/league' },
+    // { name: 'Club House & Bar', link: '/clubhouse' },
+    // { name: 'League Info', link: '/league' },
   ];
 
   return (
@@ -32,4 +32,4 @@ const MenuBar = () => {
   );
 };
 
-export default MenuBar;
+export { MenuBar };

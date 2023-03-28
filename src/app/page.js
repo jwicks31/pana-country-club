@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import styles from './page.module.css';
-import MenuBar from './components/MenuBar/MenuBar';
 import { useRouter } from 'next/navigation';
+import { MenuBar } from './components/MenuBar/MenuBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -44,17 +44,17 @@ export default function Home() {
         </p>
         <h2>Testimonials</h2>
         <p>
-          Don't just take our word for it. Here's what some of our members have
+          Don&apos;t just take our word for it. Here&apos;s what some of our members have
           to say:{' '}
         </p>
         <ul>
           <li>
-            "I've been a member of Pana Country Club for years and I always
-            enjoy playing on the beautiful course." - John D.
+            &quot;I&apos;ve been a member of Pana Country Club for years and I always
+            enjoy playing on the beautiful course.&quot; - John D.
           </li>
           <li>
-            "The staff at PCC are always friendly and welcoming. It's truly a
-            great community." - Jane S.
+            &quot;The staff at PCC are always friendly and welcoming. It&apos;s truly a
+            great community.&quot; - Jane S.
           </li>
         </ul>
       </div>
