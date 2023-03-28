@@ -6,6 +6,33 @@
   padding: 6rem;
 }
 
+.imageContainer {
+  height: 100vh;
+  width: 100%;
+}
+.image {
+  position: relative;
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center; /* centers vertically */
+  height: 300px;
+}
+.scollText {
+  font-family: var(--font-mono);
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  color:rgba(var(--callout-rgb));
+  font-size: large;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+}
 .description {
   display: inherit;
   flex-direction: column;

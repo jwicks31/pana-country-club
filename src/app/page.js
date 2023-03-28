@@ -1,23 +1,30 @@
-import Image from 'next/image';
+'use client';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
-import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
-import { MenuBar } from './components/MenuBar/MenuBar';
+import Image from 'next/image';
+import { AiOutlineArrowDown } from 'react-icons/ai';
 
+import styles from './page.module.css';
+import { MenuBar } from './components/MenuBar/MenuBar';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <MenuBar />
-      <Image
-        src="/logo.png"
-        alt="Pana Country Club Logo"
-        width={172}
-        height={127}
-        priority
-      />
+      <div className={styles.imageContainer}>
+        <Image
+          className={styles.image}
+          src="/hole-7.jpg"
+          alt="Pana Country Club Hole 7"
+          fill
+          priority
+        />
+        <div className={styles.scollText}>
+          Scoll To Explore <AiOutlineArrowDown />
+        </div>
+      </div>
       <div className={styles.description}>
         <h1>Welcome to Pana Country Club</h1>
         <p>
@@ -44,17 +51,17 @@ export default function Home() {
         </p>
         <h2>Testimonials</h2>
         <p>
-          Don&apos;t just take our word for it. Here&apos;s what some of our members have
-          to say:{' '}
+          Don&apos;t just take our word for it. Here&apos;s what some of our
+          members have to say:{' '}
         </p>
         <ul>
           <li>
-            &quot;I&apos;ve been a member of Pana Country Club for years and I always
-            enjoy playing on the beautiful course.&quot; - John D.
+            &quot;I&apos;ve been a member of Pana Country Club for years and I
+            always enjoy playing on the beautiful course.&quot; - John D.
           </li>
           <li>
-            &quot;The staff at PCC are always friendly and welcoming. It&apos;s truly a
-            great community.&quot; - Jane S.
+            &quot;The staff at PCC are always friendly and welcoming. It&apos;s
+            truly a great community.&quot; - Jane S.
           </li>
         </ul>
       </div>
