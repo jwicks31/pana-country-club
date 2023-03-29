@@ -21,7 +21,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
   }, []);
 
   const handleScroll = () => {
-    if (!toggledOffRef.current && window.pageYOffset >= window.innerHeight / 10) {
+    if (!toggledOffRef.current && window.pageYOffset >= window.innerHeight / 14) {
       toggleMenu();
     } else if (window.pageYOffset == 0) {
       setIsMenuOpen(false);
@@ -56,7 +56,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
         <div className="logo">
           {/* <a href="#"> */}
           <Image
-            src="/logo.png"
+            src="/logo-cropped.png"
             alt="Pana Country Club Logo"
             width={68}
             height={50}

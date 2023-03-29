@@ -76,7 +76,7 @@ const ContactForm = () => {
 export default function ContactPage() {
   return (
     <main className={styles.main}>
-      <MenuBar />
+      <MenuBar useScroll={false} openMenu={true} />
       <h1>Contact Us</h1>
       <ContactForm />
     </main>

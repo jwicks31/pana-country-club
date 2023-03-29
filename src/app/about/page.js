@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function AboutPage() {
   return (
     <main className={styles.main}>
-      <MenuBar />
+      <MenuBar useScroll={false} openMenu={true} />
       <p>
         Welcome to the Pana Country Club, nestled in the heart of Central
         Illinois. Our challenging 9-hole, par 35 course is beloved by advanced

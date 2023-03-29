@@ -1,19 +1,55 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { AiOutlineArrowDown } from 'react-icons/ai';
+import className from 'classnames';
 
 import styles from './page.module.css';
 import { MenuBar } from './components/MenuBar/MenuBar';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+  const [removeImage, setRemoveImage] = useState(false);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  const handleScroll = () => {
+    if (window.pageYOffset >= window.innerHeight / 5) {
+      setRemoveImage(true);
+    } else {
+      setRemoveImage(false);
+    }
+  };
   return (
     <main className={styles.main}>
       <MenuBar />
       <div className={styles.imageContainer}>
+        <Image
+          className={className(styles.imageLogo, {
+            [styles.imageHidden]: removeImage,
+          })}
+          src="/logo-cropped.png"
+          alt="Pana Country Club Logo"
+          height={200}
+          width={400}
+          priority
+        />
+        <Image
+          className={className(styles.imageText, {
+            [styles.imageHidden]: removeImage,
+          })}
+          src="/home-text.png"
+          alt="Pana Country Club Logo"
+          height={178}
+          width={1274}
+          priority
+        />
         <Image
           className={styles.image}
           src="/hole-7.jpg"
@@ -22,11 +58,10 @@ export default function Home() {
           priority
         />
         <div className={styles.scollText}>
-          Scoll To Explore <AiOutlineArrowDown />
+          Scoll To Explore <AiOutlineArrowDown size={50} />
         </div>
       </div>
-      <div className={styles.description}>
-        <h1>Welcome to Pana Country Club</h1>
+      <div className={styles.descriptionContainer}>
         <p>
           Our private 9-hole, par 35 golf course is designed for players of all
           skill levels with varied tee locations and multiple angles to the

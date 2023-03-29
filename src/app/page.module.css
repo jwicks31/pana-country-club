@@ -7,25 +7,42 @@
 }
 
 .imageContainer {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100%;
+  justify-content: flex-start;
+  align-items: center;
 }
 .image {
   position: relative;
   display: flex;
-  justify-content: center; /* centers horizontally */
-  align-items: center; /* centers vertically */
   height: 300px;
 }
+
+.imageHidden {
+  opacity: 0;
+  transition: opacity 2s;
+}
+.imageLogo {
+  z-index: 1;
+  margin-top: 15rem;
+  transition: opacity 2s;
+}
+.imageText {
+  z-index: 1;
+  margin-top: 5rem;
+  transition: opacity 2s;
+}
 .scollText {
-  font-family: var(--font-mono);
+  font-family: var(--font-raleway);
   position: absolute;
   width: 100vw;
   bottom: 0;
   left: 0;
   text-align: center;
-  color:rgba(var(--callout-rgb));
-  font-size: large;
+  color:rgb(200, 200, 175);
+  font-size: 1.5rem;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -33,33 +50,19 @@
   flex-direction: column;
   padding: 1rem;
 }
-.description {
-  display: inherit;
+
+.descriptionContainer {
+  display: flex;
   flex-direction: column;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
+  align-items: center;
+  font-size: 1rem;
+  min-height: 75vh;
   max-width: var(--max-width);
   width: 100%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: var(--font-antic-slab);
 }
 
-.description a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
-}
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
@@ -87,6 +90,22 @@
 @media (max-width: 1023px) {
   .content {
     padding: 4rem;
+  }
+
+  .imageContainer {
+    justify-content: center;
+  }
+  .imageLogo {
+    margin-top: 0rem;
+    margin-bottom: 6rem;
+  }
+
+  .imageText {
+    display: none;
+  }
+
+  .imageText {
+    display: none;
   }
 
   .description {

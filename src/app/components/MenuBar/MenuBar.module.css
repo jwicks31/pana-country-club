@@ -1,5 +1,5 @@
 .menubar {
-  font-family: var(--font-mono);
+  font-family: var(--font-raleway);
   background-color: rgb(var(--background-start-rgb));
   position: fixed;
   height: 60px;
@@ -12,6 +12,7 @@
   align-items: center;
   padding: 20px;
   transition: right 1.5s ease-in-out;
+  white-space: nowrap;
 }
 
 .menubar.fixed {
@@ -25,7 +26,7 @@
 
 .menu {
   width: 50%;
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .menu.open {
@@ -43,20 +44,20 @@
 }
 
 .menu li {
-  margin: 10px 0;
+  margin: 10px 10px;
 }
 
 .menu a {
-  color: #333;
+  color: rgb(var(--primary));
   text-decoration: none;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1rem;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
 }
 
 .menu a:hover {
-  color: #f1c40f;
+  color: var(--callout);
 }
 
 .hamburger {
