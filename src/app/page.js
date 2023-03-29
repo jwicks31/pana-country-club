@@ -50,13 +50,7 @@ export default function Home() {
           width={1274}
           priority
         />
-        <Image
-          className={styles.image}
-          src="/hole-7.jpg"
-          alt="Pana Country Club Hole 7"
-          fill
-          priority
-        />
+        <Image src="/hole-7.jpg" alt="Pana Country Club Hole 7" fill priority />
         <div className={styles.scollText}>
           Scoll To Explore <AiOutlineArrowDown size={50} />
         </div>
@@ -71,35 +65,55 @@ export default function Home() {
           water hazards and sloped greens mixed throughout. The Pana Country
           Club facility also includes a chipping and putting green.
         </p>
+
+        {/* <p>
+          Don&apos;t just take our word for it. Here&apos;s what some of our
+          members have to say:{' '}
+        </p> */}
+      </div>
+      <div className={styles.membershipContainer}>
+        <div className={styles.membershipImages}>
+          <div className={styles.membershipImage}>
+            <Image
+              src="/menu-1.jpg"
+              alt="Pana Country Club Menu Picture"
+              fill
+              priority
+            />
+          </div>
+          <div className={styles.membershipImage}>
+            <Image
+              src="/grill.jpg"
+              alt="Pana Country Club Grill"
+              fill
+              priority
+            />
+          </div>
+          <div className={styles.membershipImage}>
+            <Image
+              src="/banquet.jpg"
+              alt="Pana Country Club Banquet Area"
+              fill
+              priority
+            />
+          </div>
+        </div>
         <h2>Membership</h2>
         <p>
           Interested in becoming a member? We offer a variety of membership
           options to suit your needs and budget.{' '}
           <Link href="/membership">Learn more</Link>
         </p>
-        <h2>Contact Us</h2>
-        <p>
-          Have questions or want to book a tee time? Contact us today. <br />
-          Phone: (217) 562-2641 <br />
-          Email: ​panacountryclub@gmail.com <br />
-          Address: 411 East 9th Street ​PO Box 16 Pana, IL 62557
-        </p>
-        <h2>Testimonials</h2>
-        <p>
-          Don&apos;t just take our word for it. Here&apos;s what some of our
-          members have to say:{' '}
-        </p>
-        <ul>
-          <li>
-            &quot;I&apos;ve been a member of Pana Country Club for years and I
-            always enjoy playing on the beautiful course.&quot; - John D.
-          </li>
-          <li>
-            &quot;The staff at PCC are always friendly and welcoming. It&apos;s
-            truly a great community.&quot; - Jane S.
-          </li>
-        </ul>
       </div>
+
+      <h2>Contact Us</h2>
+      <p>
+        Have questions or want to book a tee time? Contact us today. <br />
+        Phone: (217) 562-2641 <br />
+        Email: ​panacountryclub@gmail.com <br />
+        Address: 411 East 9th Street ​PO Box 16 Pana, IL 62557
+      </p>
+      <h2>Testimonials: Cominng Soon</h2>
     </main>
   );
 }

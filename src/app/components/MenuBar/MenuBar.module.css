@@ -165,3 +165,19 @@
     height: 33vh;
   }
 }
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+
+/* @media (prefers-color-scheme: dark) {
+  .logo img {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+} */
