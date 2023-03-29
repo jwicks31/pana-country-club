@@ -6,6 +6,10 @@
   padding: 6rem;
 }
 
+.image {
+  object-fit: cover;
+}
+
 .imageContainer {
   display: flex;
   flex-direction: column;

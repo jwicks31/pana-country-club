@@ -12,7 +12,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
   const toggledOffRef = useRef(false);
 
   useEffect(() => {
-    if (useScroll) {
+    if (useScroll && window.matchMedia('(min-width: 875px)').matches) {
       window.addEventListener('scroll', handleScroll);
       return () => {
         window.removeEventListener('scroll', handleScroll);
@@ -53,7 +53,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
           [styles.fixed]: !isMenuOpen,
         })}
       >
-        <div className="logo">
+        <div className={styles.logo}>
           {/* <a href="#"> */}
           <Image
             src="/logo-cropped.png"
@@ -81,6 +81,17 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
           </ul>
         </div>
       </div>
+
+      <div className={styles.mobileLogoBar} />
+      <div className={styles.mobileLogo}>
+        <Image
+          src="/logo-cropped.png"
+          alt="Pana Country Club Logo"
+          width={68}
+          height={50}
+          priority
+        />
+      </div >
       <div className={styles.hamburger} onClick={toggleMenu}>
         <div
           className={className(styles.line, {
