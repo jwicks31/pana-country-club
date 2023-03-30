@@ -18,6 +18,10 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
+    if (openMenu && window.matchMedia('(max-width: 875px)').matches) {
+      console.log("HERE CLOSING");
+      setIsMenuOpen(false);
+    }
   }, []);
 
   const handleScroll = () => {

@@ -3,21 +3,20 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
 }
 
 .imageContainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  justify-content: flex-start;
+  min-height: 100vh;
+  min-width: 100%;
+  justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 .image {
   position: relative;
-  display: flex;
   height: 300px;
   object-fit: cover;
 }
@@ -28,14 +27,15 @@
 }
 .imageLogo {
   z-index: 1;
-  margin-top: 15rem;
   transition: opacity 2s;
+  margin-bottom: 2rem;
 }
+
 .imageText {
   z-index: 1;
-  margin-top: 5rem;
   transition: opacity 2s;
 }
+
 .scollText {
   font-family: var(--font-raleway);
   position: absolute;
@@ -67,11 +67,11 @@
   border-bottom-style: solid;
   padding: 25px 100px;
   margin-bottom: 6rem;
+  margin-top: 6rem;
   width: 100%;
   z-index: 2;
   font-family: var(--font-antic-slab);
 }
-
 
 .membershipContainer {
   display: flex;
@@ -79,8 +79,88 @@
   flex-direction: column;
   justify-self: center;
   align-items: center;
-  background-color: rgb(122, 88, 49);
+  background-color: rgba(122, 88, 49, 1);
+  background:linear-gradient(to top right, rgb(107, 76, 41), rgba(122, 88, 49, 0.9), rgba(107, 76, 41, 1));
   color: rgb(255,231,186);
+}
+
+.membershipContainer p {
+  padding: 2rem;
+  font-family: var(--font-raleway);
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.membershipContainer p:after {
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgb(var(--background-start-rgb));
+  content: '';
+  display: block;
+  width: 15%;
+}
+
+.cloudImage {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.cloudImage:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/clouds.jpg');
+  background-repeat: repeat;
+  background-size: contain;
+  opacity: 1;
+  z-index: -1; /* Set the z-index to position the background layer behind the content */
+}
+
+.membershipButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  justify-self: flex-end;
+  padding: .75rem;
+  border: 1px solid #f4d16d;
+  color: #fef493;
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}
+
+.membershipCountryClub {
+  display: block; 
+  position: relative;
+  font-size: 1.2rem;
+  align-self: flex-start;
+  font-weight: 200;
+  right: 0px;
+  width: 100%;
+  transition: right 2s;
+  color: #f4d16d;
+}
+
+.belong {
+  display: block; 
+  position: relative;
+  font-size: 2.3rem;
+  font-weight: 300;
+  margin-top: 2rem;
+  left: 0px;
+  width: 100%;
+  color: rgb(var(--background-start-rgb));
+  transition: left 2s;
 }
 
 .membershipImages {
@@ -139,7 +219,10 @@
   }
 
   .imageContainer {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex-direction: column;
   }
 
   .imageLogo {
@@ -154,7 +237,8 @@
   .descriptionContainer {
     flex-direction: column;
     padding: 0px;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
   }
 
   .descriptionContainer a {
@@ -193,6 +277,18 @@
       rgb(var(--background-end-rgb)) 40%
     );
     z-index: 1;
+  }
+
+  .membershipCountryClub {
+    white-space: nowrap;
+  }
+
+  .belong {
+    white-space: nowrap;
+  }
+  .membershipButton {
+    padding: .25rem;
+    margin: 1rem;
   }
 }
 

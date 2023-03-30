@@ -21,10 +21,10 @@ export default function AboutPage() {
         a welcoming, community-focused environment for our approximately 125
         active members. Our Board of Directors and committees work tirelessly to
         ensure that our members have access to a top-notch golf experience, as
-        well as a wide range of social events and activities. We&apos;re proud to be
-        a part of this tight-knit community of golf enthusiasts, and we welcome
-        you to come see for yourself what makes the Pana Country Club such a
-        special place.
+        well as a wide range of social events and activities. We&apos;re proud
+        to be a part of this tight-knit community of golf enthusiasts, and we
+        welcome you to come see for yourself what makes the Pana Country Club
+        such a special place.
       </p>
     </main>
   );

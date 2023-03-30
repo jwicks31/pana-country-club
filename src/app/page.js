@@ -1,22 +1,49 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { Transition } from 'react-transition-group';
+
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { AiOutlineArrowDown } from 'react-icons/ai';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import className from 'classnames';
 
 import styles from './page.module.css';
 import { MenuBar } from './components/MenuBar/MenuBar';
 const inter = Inter({ subsets: ['latin'] });
 
+const duration = 300;
+
 export default function Home() {
   const [removeImage, setRemoveImage] = useState(false);
+  const [membershipReady, setMembershipReady] = useState(false);
+  const membershipContainerRef = useRef(null);
+  const membershipCountryClubTextRef = useRef(null);
+  const belongRef = useRef(null);
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    const membershipRefInstance = membershipContainerRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const ratio = window.matchMedia('(min-width: 875px)').matches
+          ? 0.85
+          : 0.45;
+        if (entry.intersectionRatio >= ratio) {
+          setMembershipReady(true);
+        } else {
+          setMembershipReady(false);
+        }
+      },
+      { threshold: [0, 0.05, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.95, 1] }
+    );
+    observer.observe(membershipRefInstance);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      console.log('WHAT', membershipRefInstance);
+      observer.unobserve(membershipRefInstance);
     };
   }, []);
   const handleScroll = () => {
@@ -71,7 +98,7 @@ export default function Home() {
           members have to say:{' '}
         </p> */}
       </div>
-      <div className={styles.membershipContainer}>
+      <div ref={membershipContainerRef} className={styles.membershipContainer}>
         <div className={styles.membershipImages}>
           <div className={styles.membershipImage}>
             <Image
@@ -79,6 +106,9 @@ export default function Home() {
               alt="Pana Country Club Menu Picture"
               fill
               priority
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
             />
           </div>
           <div className={styles.membershipImage}>
@@ -87,6 +117,9 @@ export default function Home() {
               alt="Pana Country Club Grill"
               fill
               priority
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
             />
           </div>
           <div className={styles.membershipImage}>
@@ -95,17 +128,63 @@ export default function Home() {
               alt="Pana Country Club Banquet Area"
               fill
               priority
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
             />
           </div>
         </div>
-        <h2>Membership</h2>
-        <p>
-          Interested in becoming a member? We offer a variety of membership
-          options to suit your needs and budget.{' '}
-          <Link href="/membership">Learn more</Link>
-        </p>
+        <div className={styles.cloudImage}>
+          <p>
+            <Transition
+              nodeRef={membershipCountryClubTextRef}
+              in={membershipReady}
+              timeout={duration}
+            >
+              {(state) => {
+                const transitionStyles = {
+                  entered: { right: '0px' },
+                  exited: { right: '150%' },
+                };
+                return (
+                  <span
+                    className={styles.membershipCountryClub}
+                    ref={membershipCountryClubTextRef}
+                    style={transitionStyles[state]}
+                  >
+                    PANA COUNTRY CLUB
+                  </span>
+                );
+              }}
+            </Transition>
+            <Transition
+              nodeRef={belongRef}
+              in={membershipReady}
+              timeout={duration}
+            >
+              {(state) => {
+                const transitionStyles = {
+                  entered: { left: '0px' },
+                  exited: { left: '150%' },
+                };
+                return (
+                  <span
+                    className={styles.belong}
+                    ref={belongRef}
+                    style={transitionStyles[state]}
+                  >
+                    You Belong Here
+                  </span>
+                );
+              }}
+            </Transition>
+          </p>
+          <Link className={styles.membershipButton} href="/membership">
+            Learn more about Membership at Pana Country Club{' '}
+            <MdKeyboardDoubleArrowRight />
+          </Link>
+        </div>
       </div>
-
       <h2>Contact Us</h2>
       <p>
         Have questions or want to book a tee time? Contact us today. <br />
@@ -113,7 +192,6 @@ export default function Home() {
         Email: ​panacountryclub@gmail.com <br />
         Address: 411 East 9th Street ​PO Box 16 Pana, IL 62557
       </p>
-      <h2>Testimonials: Cominng Soon</h2>
     </main>
   );
 }
