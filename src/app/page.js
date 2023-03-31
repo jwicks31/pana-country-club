@@ -42,7 +42,6 @@ export default function Home() {
     observer.observe(membershipRefInstance);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      console.log('WHAT', membershipRefInstance);
       observer.unobserve(membershipRefInstance);
     };
   }, []);
@@ -185,13 +184,6 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <h2>Contact Us</h2>
-      <p>
-        Have questions or want to book a tee time? Contact us today. <br />
-        Phone: (217) 562-2641 <br />
-        Email: ​panacountryclub@gmail.com <br />
-        Address: 411 East 9th Street ​PO Box 16 Pana, IL 62557
-      </p>
     </main>
   );
 }

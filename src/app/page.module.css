@@ -80,7 +80,7 @@
   justify-self: center;
   align-items: center;
   background-color: rgba(122, 88, 49, 1);
-  background:linear-gradient(to top right, rgb(107, 76, 41), rgba(122, 88, 49, 0.9), rgba(107, 76, 41, 1));
+  background: linear-gradient(to top right, rgb(107, 76, 41), rgba(122, 88, 49, 0.9), rgba(107, 76, 41, 1));
   color: rgb(255,231,186);
 }
 
@@ -210,10 +210,6 @@
   }
 }
 @media (max-width: 1023px) {
-  .main {
-    padding: 2rem;
-  }
-
   .content {
     padding: 4rem;
   }

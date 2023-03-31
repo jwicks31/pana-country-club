@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import className from 'classnames';
 
 import styles from './MenuBar.module.css';
@@ -11,7 +11,25 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(openMenu);
   const toggledOffRef = useRef(false);
 
+  const toggleMenu = useCallback(() => {
+    if (isMenuOpen && window.pageYOffset !== 0) {
+      toggledOffRef.current = true;
+    }
+    setIsMenuOpen(!isMenuOpen);
+  }, [isMenuOpen]);
+
   useEffect(() => {
+    const handleScroll = () => {
+      if (
+        !toggledOffRef.current &&
+        window.pageYOffset >= window.innerHeight / 14
+      ) {
+        toggleMenu();
+      } else if (window.pageYOffset == 0) {
+        setIsMenuOpen(false);
+        toggledOffRef.current = false;
+      }
+    };
     if (useScroll && window.matchMedia('(min-width: 875px)').matches) {
       window.addEventListener('scroll', handleScroll);
       return () => {
@@ -19,26 +37,9 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
       };
     }
     if (openMenu && window.matchMedia('(max-width: 875px)').matches) {
-      console.log("HERE CLOSING");
       setIsMenuOpen(false);
     }
-  }, []);
-
-  const handleScroll = () => {
-    if (!toggledOffRef.current && window.pageYOffset >= window.innerHeight / 14) {
-      toggleMenu();
-    } else if (window.pageYOffset == 0) {
-      setIsMenuOpen(false);
-      toggledOffRef.current = false;
-    }
-  };
-
-  const toggleMenu = () => {
-    if (isMenuOpen && window.pageYOffset !== 0) {
-      toggledOffRef.current = true;
-    }
-    setIsMenuOpen(!isMenuOpen);
-  };
+  }, [useScroll, openMenu]);
 
   const pathname = usePathname();
   const menuItems = [
@@ -95,7 +96,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
           height={50}
           priority
         />
-      </div >
+      </div>
       <div className={styles.hamburger} onClick={toggleMenu}>
         <div
           className={className(styles.line, {
