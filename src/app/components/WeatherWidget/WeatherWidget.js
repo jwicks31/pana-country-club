@@ -12,25 +12,14 @@ function degreeToCardinal(degrees) {
   return cardinals[index];
 }
 
-function WeatherWidget({
-  apiKey,
-  geo = undefined,
-}) {
-  const [errorMsg, loading, weatherData] = useFetchWeather(
-    apiKey,
-    geo
-  );
+function WeatherWidget({ apiKey, geo = undefined }) {
+  const [errorMsg, loading, weatherData] = useFetchWeather(apiKey, geo);
 
   if (loading) {
     return (
-      <p
-        style={{
-          color: 'white',
-          fontSize: '30px',
-        }}
-      >
-        Loading...
-      </p>
+      <div className={styles.container}>
+        <div className={styles.loading}></div>
+      </div>
     );
   }
 
@@ -40,6 +29,7 @@ function WeatherWidget({
         style={{
           color: 'white',
           fontSize: '30px',
+          height: '80px',
         }}
       >
         {errorMsg}
@@ -49,18 +39,20 @@ function WeatherWidget({
 
   return (
     <div className={styles.container}>
-      <Image
-        alt="weather-icon"
-        src={`${ICON_BASE_URL + weatherData.weather[0].icon}@2x.png`}
-        height={50}
-        width={50}
-      />
-      <p>
-        {Math.round(weatherData.main.temp)}°F |{' '}
-        {weatherData.weather[0].description} | Wind: {weatherData.wind.speed}mph{' '}
-        {degreeToCardinal(weatherData.wind.deg)} | Humidity:{' '}
-        {weatherData.main.humidity}%
-      </p>
+      <div className={styles.main}>
+        <Image
+          alt="weather-icon"
+          src={`${ICON_BASE_URL + weatherData.weather[0].icon}@2x.png`}
+          height={50}
+          width={50}
+        />
+        <p>
+          {Math.round(weatherData.main.temp)}°F |{' '}
+          {weatherData.weather[0].description} | Wind: {weatherData.wind.speed}mph{' '}
+          {degreeToCardinal(weatherData.wind.deg)} | Humidity:{' '}
+          {weatherData.main.humidity}%
+        </p>
+      </div>
       <a
         href="https://www.accuweather.com/en/us/taylorville/62568/weather-forecast/332746"
         target="blank"
