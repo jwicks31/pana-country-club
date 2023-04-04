@@ -29,7 +29,7 @@ const Footer = (props) => {
               <Link href="/about">About Pana Country Club</Link>
             </li>
             <li>
-              <Link href="/contact">Contact &amp; Directions</Link>
+              <Link href="/contact">Contact Us</Link>
             </li>
           </ul>
           <ul>

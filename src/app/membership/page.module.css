@@ -1,0 +1,32 @@
+.main {
+  font-family: var(--font-raleway);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 12rem;
+  padding-bottom: 2rem;
+  min-height: calc(100vh - 22rem);
+}
+
+.main p {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 1rem;
+}
+
+.main p span {
+  margin-bottom: .25rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.cartOptions {
+  width: 100%;
+}
+
+.cartOptions p {
+  margin: 1rem;
+}

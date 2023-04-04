@@ -3,22 +3,13 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 6rem 12rem;
+  min-height: calc(100vh - 22rem);
 }
 
 /* Mobile and Tablet */
 @media (max-width: 1023px) {
-  .content {
+  .main {
     padding: 4rem;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
   }
 }
