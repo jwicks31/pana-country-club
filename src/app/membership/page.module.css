@@ -30,3 +30,35 @@
 .cartOptions p {
   margin: 1rem;
 }
+
+/* Mobile and Tablet */
+@media (max-width: 1023px) {
+  .main {
+    padding: 1rem;
+    padding-top: 4rem;
+  }
+  
+  .main p {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+  }
+
+  .main a {
+    padding-bottom: .75rem;
+  }
+  
+  .membershipOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cartOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
