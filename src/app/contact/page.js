@@ -108,6 +108,14 @@ const ContactForm = () => {
     setComment(event.target.value);
   };
 
+  const validateForm = () => {
+    if (!email && !phone) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -118,7 +126,7 @@ const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name: { firstName, lastName }, address, city, state, postalCode, email, phone, message: comment }),
       });
 
       if (!res.ok) {
@@ -218,7 +226,6 @@ const ContactForm = () => {
             name="email"
             value={email}
             onChange={handleEmailChange}
-            required
           />
         </div>
         <div>
@@ -229,7 +236,6 @@ const ContactForm = () => {
             name="phone"
             value={phone}
             onChange={handlePhoneChange}
-            required
           />
         </div>
       </fieldset>
@@ -245,6 +251,7 @@ const ContactForm = () => {
             required
           />
         </div>
+        <button type="submit" disabled={!validateForm()}>Send</button>
       </fieldset>
     </form>
   );
