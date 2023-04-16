@@ -9,9 +9,11 @@ const Footer = (props) => {
     <footer>
       <div className={styles.contactContainer}>
         <div className={styles.churchImage}>
-          <h2>
-            Contact <span>Us</span>
-          </h2>
+          <Link href="/contact">
+            <h2>
+              Contact <span>Us</span>
+            </h2>
+          </Link>
           <p>
             (217) 562-2641 | ​panacountryclub@gmail.com | 411 East 9th Street
             ​PO Box 16 Pana, IL 62557
@@ -41,11 +43,6 @@ const Footer = (props) => {
             <li>
               <Link href="/membership">Membership</Link>
             </li>
-            {/* <li>
-                <a href="/club/scripts/library/view_document.asp?NS=MEM&amp;DN=MEMCAT">
-                  Membership Categories
-                </a>
-              </li> */}
           </ul>
         </div>
         <div className={styles.address}>

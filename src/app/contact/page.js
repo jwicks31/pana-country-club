@@ -114,7 +114,7 @@ const ContactForm = () => {
     } else {
       return true;
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,7 +126,16 @@ const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: { firstName, lastName }, address, city, state, postalCode, email, phone, message: comment }),
+        body: JSON.stringify({
+          name: { firstName, lastName },
+          address,
+          city,
+          state,
+          postalCode,
+          email,
+          phone,
+          message: comment,
+        }),
       });
 
       if (!res.ok) {
@@ -141,119 +150,128 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset>
-        <legend>Contact Information</legend>
-        <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={firstName}
-            onChange={handleFirstNameChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={lastName}
-            onChange={handleLastNameChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="address">Address:</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={address}
-            onChange={handleAddressChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="city">City:</label>
-          <input
-            type="text"
-            id="city"
-            name="city"
-            value={city}
-            onChange={handleCityChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="state">State:</label>
-          <select
-            id="state"
-            name="state"
-            value={state}
-            onChange={handleStateChange}
-            required
+    <div className={styles.contactForm}>
+      <h1>Contact Us</h1>
+      <form onSubmit={handleSubmit}>
+        <fieldset className={styles.section}>
+          <legend>Contact Information</legend>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              onChange={handleFirstNameChange}
+              required
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              onChange={handleLastNameChange}
+              required
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={address}
+              onChange={handleAddressChange}
+              required
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              value={city}
+              onChange={handleCityChange}
+              required
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="state">State:</label>
+            <select
+              id="state"
+              name="state"
+              value={state}
+              onChange={handleStateChange}
+              required
+            >
+              {stateOptions.map((stateCode) => (
+                <option key={stateCode} value={stateCode}>
+                  {stateCode}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="postalCode">Postal Code:</label>
+            <input
+              type="text"
+              id="postalCode"
+              name="postalCode"
+              value={postalCode}
+              onChange={handlePostalCodeChange}
+              required
+            />
+          </div>
+        </fieldset>
+        <fieldset className={styles.section}>
+          <legend>How Should We Contact You</legend>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="phone">Phone:</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={phone}
+              onChange={handlePhoneChange}
+            />
+          </div>
+        </fieldset>
+        <fieldset className={styles.section}>
+          <legend>Additional Information</legend>
+          <div className={styles.inputWrapper}>
+            <label htmlFor="comment">Comment:</label>
+            <textarea
+              id="comment"
+              name="comment"
+              value={comment}
+              onChange={handleCommentChange}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={!validateForm()}
           >
-            {stateOptions.map((stateCode) => (
-              <option key={stateCode} value={stateCode}>
-                {stateCode}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="postalCode">Postal Code:</label>
-          <input
-            type="text"
-            id="postalCode"
-            name="postalCode"
-            value={postalCode}
-            onChange={handlePostalCodeChange}
-            required
-          />
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>How Should We Contact You</legend>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="phone">Phone:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={phone}
-            onChange={handlePhoneChange}
-          />
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Additional Information</legend>
-        <div>
-          <label htmlFor="comment">Comment:</label>
-          <textarea
-            id="comment"
-            name="comment"
-            value={comment}
-            onChange={handleCommentChange}
-            required
-          />
-        </div>
-        <button type="submit" disabled={!validateForm()}>Send</button>
-      </fieldset>
-    </form>
+            Send
+          </button>
+        </fieldset>
+      </form>
+    </div>
   );
 };
 
@@ -261,7 +279,6 @@ export default function ContactPage() {
   return (
     <main className={styles.main}>
       <MenuBar useScroll={false} openMenu={true} />
-      <h1>Contact Us</h1>
       <ContactForm />
     </main>
   );

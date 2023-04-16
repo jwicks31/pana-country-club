@@ -101,8 +101,8 @@ export default function Home() {
         <div className={styles.membershipImages}>
           <div className={styles.membershipImage}>
             <Image
-              src="/menu-1.jpg"
-              alt="Pana Country Club Menu Picture"
+              src="/grill.jpg"
+              alt="Pana Country Club Grill"
               fill
               priority
               sizes="(max-width: 768px) 100vw,
@@ -112,8 +112,8 @@ export default function Home() {
           </div>
           <div className={styles.membershipImage}>
             <Image
-              src="/grill.jpg"
-              alt="Pana Country Club Grill"
+              src="/menu.png"
+              alt="Pana Country Club Menu Picture"
               fill
               priority
               sizes="(max-width: 768px) 100vw,
