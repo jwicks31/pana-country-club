@@ -43,7 +43,7 @@
   bottom: 0;
   left: 0;
   text-align: center;
-  color:rgb(200, 200, 175);
+  color:var(--accent2-color);
   font-size: 1.5rem;
   font-weight: bold;
   display: flex;
@@ -60,10 +60,10 @@
   font-size: 1.2rem;
   max-width: var(--max-width);
   border-top-width: 1px;
-  border-top-color: var(--primary);
+  border-top-color: var(--primary-color);
   border-top-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: var(--primary);
+  border-bottom-color: var(--primary-color);
   border-bottom-style: solid;
   padding: 25px 100px;
   margin-bottom: 6rem;
@@ -79,9 +79,9 @@
   flex-direction: column;
   justify-self: center;
   align-items: center;
-  background-color: rgba(122, 88, 49, 1);
+  background-color: var(--primary);
   background: linear-gradient(to top right, rgb(107, 76, 41), rgba(122, 88, 49, 0.9), rgba(107, 76, 41, 1));
-  color: rgb(255,231,186);
+  color: var(--accent-color);
 }
 
 .membershipContainer p {
@@ -133,8 +133,8 @@
   align-self: center;
   justify-self: flex-end;
   padding: .75rem;
-  border: 1px solid #f4d16d;
-  color: #fef493;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
   margin-bottom: 4rem;
   text-transform: uppercase;
 }

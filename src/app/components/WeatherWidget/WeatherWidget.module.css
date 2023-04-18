@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 80px;
-  color: rgb(var(--background-start-rgb));
+  color: var(--primary-color);
 }
 
 .main {
@@ -19,7 +19,7 @@
 }
 
 .container a {
-  color: #988A81;
+  color: var(--accent-color);
   margin-bottom: 1rem;
 }
 .loading {

@@ -1,6 +1,6 @@
 .menubar {
   font-family: var(--font-raleway);
-  background-color: rgb(var(--background-start-rgb));
+  background-color: var(--background-color);
   position: fixed;
   height: 60px;
   top: 0;
@@ -55,7 +55,7 @@
 }
 
 .menu a {
-  color: var(--primary);
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
@@ -63,8 +63,12 @@
   transition: all 0.3s ease-in-out;
 }
 
+.menuItemActive a {
+  color: var(--accent-color);
+}
+
 .menu a:hover {
-  color: var(--callout);
+  color: var(--accent3-color);
 }
 
 .hamburger {
@@ -83,7 +87,7 @@
 .line {
   height: 2px;
   width: 25px;
-  background-color: var(--primary);
+  background-color: var(--primary-color);
   margin: 5px 0;
   transition: transform 0.3s ease-in-out;
 }
@@ -122,12 +126,12 @@
     width: 100%;
     z-index: 3;
     min-height: 60px;
-    background-color: rgb(var(--background-start-rgb));
+    background-color: var(--background-color);
   }
 
   .navContainer {
     min-height: 2rem;
-    background-color: rgb(var(--background-start-rgb));
+    background-color: var(--background-color);
   }
   .menubar {
     align-items: center;
@@ -178,8 +182,8 @@
 }
 
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   .logo img {
     filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
   }
-} */
+}

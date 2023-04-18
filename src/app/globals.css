@@ -3,6 +3,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&family=Raleway:wght@100;200;500&display=swap');
 
 :root {
+  --background-color: #fbf9f4;
+  --background-complement-color: #211915;
+  --background-complement-color-light: #2C231E;
+  --text-color: #333333;
+  --cta-color: #98b5c3;
+  --accent-color: #d4af37;
+  --accent2-color: #f5a142;
+  --accent3-color: #ac8e2c;
+  --primary-color: #c3b598;
+  --secondary-color: #ffa500;
+
   --max-width: 945px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -18,9 +29,9 @@
   --primary-rgb: 195, 181, 152;
   --secondary-rgb: 255, 165, 0;
 
-  --primary: rgb(195, 181, 152);
-  --secondary: rgb(255, 165, 0);
-  --callout: rgb(152, 181, 195);
+  --primary: #c3b598;
+  --secondary: #ffa500;
+  --callout: #98b5c3;
 
   --primary-glow: radial-gradient(
     var(--callout),
@@ -48,8 +59,21 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+  
   :root {
+    --background-color: #1a1a1a;
+    --background-complement-color: #13100f;
+    --background-complement-color-light: #27211f;
+    --text-color: #c5c5c5;
+    --cta-color: #0f5a2e;
+    --accent-color: #d4af37;
+    --accent2-color: #f5a142;
+    --accent3-color: #ac8e2c;
+    --primary-color: #1d7a46;
+    --secondary-color: #2c2c2c;
+
+
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 18, 18, 18;
     --background-end-rgb: 20, 20, 20;
@@ -82,7 +106,7 @@
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
   }
-} */
+}
 
 * {
   box-sizing: border-box;
@@ -97,13 +121,13 @@ body {
 }
 
 body {
-  color: var(--primary);
+  color: var(--primary-color);
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    var(--background-color);
 }
 
 a {
