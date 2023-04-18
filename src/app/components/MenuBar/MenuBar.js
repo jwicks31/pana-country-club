@@ -59,15 +59,15 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
         })}
       >
         <div className={styles.logo}>
-          {/* <a href="#"> */}
-          <Image
-            src="/logo-cropped.png"
-            alt="Pana Country Club Logo"
-            width={68}
-            height={50}
-            priority
-          />
-          {/* </a> */}
+          <Link href="/">
+            <Image
+              src="/logo-cropped.png"
+              alt="Pana Country Club Logo"
+              width={68}
+              height={50}
+              priority
+            />
+          </Link>
         </div>
         <div className={className(styles.menu, { [styles.open]: isMenuOpen })}>
           <ul>
