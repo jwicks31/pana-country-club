@@ -21,9 +21,9 @@ export async function POST(req) {
       status: 500,
     });
   }
-  const plainTextEmail = `Dear Owner,
+  const plainTextEmail = `Dear Pana Country Club,
 
-    You have received a new contact request from your golf course country club's website contact form. Here are the details:
+    You have received a new contact request from your website contact form. Here are the details:
 
     Name: ${firstName} ${lastName}
     ${email ? `Email: ${email}` : ''}
@@ -39,7 +39,7 @@ export async function POST(req) {
     Please reach out to the person at your earliest convenience using the provided contact information.
 
     Sincerely,
-    Your Golf Course Country Club Team`;
+    Pana Country Club Board`;
 
   const htmlEmail = `
     <!DOCTYPE html>
@@ -63,9 +63,9 @@ export async function POST(req) {
     </head>
     <body>
 
-    <p>Dear Owner,</p>
+    <p>Dear Pana Country Club,</p>
 
-    <p>You have received a new contact request from your golf course country club's website contact form. Here are the details:</p>
+    <p>You have received a new contact request from your website contact form. Here are the details:</p>
 
     <table>
       <tr>
@@ -114,7 +114,7 @@ export async function POST(req) {
     <p>Please reach out to the person at your earliest convenience using the provided contact information.</p>
 
     <p>Sincerely,<br>
-    Your Golf Course Country Club Team</p>
+    Pana Country Club Board</p>
 
     </body>
     </html>
@@ -122,7 +122,9 @@ export async function POST(req) {
 
   // setup email data with unicode symbols
   const mailOptions = {
-    from: `"${firstName} ${lastName}" <${email}>`,
+    from: `"${firstName} ${lastName}" <${
+      email ? email : 'panacountryclubwebsite@gmail.com'
+    }>`,
     to: 'panacountryclubwebsite@gmail.com', // list of receivers
     subject: `New Conact Form Request From ${firstName}`, // Subject line
     text: plainTextEmail, // plain text body
