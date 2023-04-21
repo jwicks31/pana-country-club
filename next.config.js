@@ -19,19 +19,24 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/golf--leauges.html',
-        destination: '/',
-        permanent: false,
-      },
-      {
         source: '/member.html',
         destination: '/membership',
         permanent: true,
       },
       {
-        source: '/about.html',
+        source: '/about-us.html',
         destination: '/about',
         permanent: true,
+      },
+      {
+        source: '/golf--leauges.html',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/clubhouse--bar.html',
+        destination: '/',
+        permanent: false,
       },
     ];
   },
