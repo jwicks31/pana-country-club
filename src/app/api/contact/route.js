@@ -149,7 +149,7 @@ export async function POST(req, res) {
     from: `"${firstName} ${lastName}" <${
       email ? email : 'panacountryclubwebsite@gmail.com'
     }>`,
-    to: 'panacountryclubwebsite@gmail.com', // list of receivers
+    to: 'panacountryclub@gmail.com', // list of receivers
     subject: `New Conact Form Request From ${firstName}`, // Subject line
     text: plainTextEmail, // plain text body
     html: htmlEmail, // html body
