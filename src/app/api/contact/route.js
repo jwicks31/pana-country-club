@@ -11,9 +11,33 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function POST(req) {
-  const res = await req.json();
-  const { name: { firstName, lastName } = {}, email, phone, address, city, state, postalCode: zip, message } = res;
+function sendMailPromise(transporter, mailOptions) {
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        reject(new Error('Something went wrong.'));
+      } else {
+        console.log('Message sent: %s', info.messageId);
+        resolve(info);
+      }
+    });
+  });
+}
+
+
+export async function POST(req, res) {
+  const body = await req.json();
+  const {
+    name: { firstName, lastName } = {},
+    email,
+    phone,
+    address,
+    city,
+    state,
+    postalCode: zip,
+    message,
+  } = body;
 
   // Perform validation on the form data
   if (!firstName || (!email && !phone) || !message) {
@@ -23,102 +47,102 @@ export async function POST(req) {
   }
   const plainTextEmail = `Dear Pana Country Club,
 
-    You have received a new contact request from your website contact form. Here are the details:
+      You have received a new contact request from your website contact form. Here are the details:
 
-    Name: ${firstName} ${lastName}
-    ${email ? `Email: ${email}` : ''}
-    ${phone ? `Phone: ${phone}` : ''}
-    Address: ${address}
-    City: ${city}
-    State: ${state}
-    Zip: ${zip}
+      Name: ${firstName} ${lastName}
+      ${email ? `Email: ${email}` : ''}
+      ${phone ? `Phone: ${phone}` : ''}
+      Address: ${address}
+      City: ${city}
+      State: ${state}
+      Zip: ${zip}
 
-    Message:
-    ${message}
+      Message:
+      ${message}
 
-    Please reach out to the person at your earliest convenience using the provided contact information.
+      Please reach out to the person at your earliest convenience using the provided contact information.
 
-    Sincerely,
-    Pana Country Club Board`;
+      Sincerely,
+      Pana Country Club Board`;
 
   const htmlEmail = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+          }
+          table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+          }
+          th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+          }
+        </style>
+      </head>
+      <body>
+
+      <p>Dear Pana Country Club,</p>
+
+      <p>You have received a new contact request from your website contact form. Here are the details:</p>
+
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td>${firstName} ${lastName}</td>
+        </tr>
+        ${
+          email
+            ? `
+        <tr>
+          <td>Email:</td>
+          <td>${email}</td>
+        </tr>`
+            : ''
         }
-        table {
-          border-collapse: collapse;
-          width: 100%;
-          margin-bottom: 20px;
+        ${
+          phone
+            ? `
+        <tr>
+          <td>Phone:</td>
+          <td>${phone}</td>
+        </tr>`
+            : ''
         }
-        th, td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
-        }
-      </style>
-    </head>
-    <body>
+        <tr>
+          <td>Address:</td>
+          <td>${address}</td>
+        </tr>
+        <tr>
+          <td>City:</td>
+          <td>${city}</td>
+        </tr>
+        <tr>
+          <td>State:</td>
+          <td>${state}</td>
+        </tr>
+        <tr>
+          <td>Zip:</td>
+          <td>${zip}</td>
+        </tr>
+      </table>
 
-    <p>Dear Pana Country Club,</p>
+      <p>Message:</p>
+      <p>${message}</p>
 
-    <p>You have received a new contact request from your website contact form. Here are the details:</p>
+      <p>Please reach out to the person at your earliest convenience using the provided contact information.</p>
 
-    <table>
-      <tr>
-        <td>Name:</td>
-        <td>${firstName} ${lastName}</td>
-      </tr>
-      ${
-        email
-          ? `
-      <tr>
-        <td>Email:</td>
-        <td>${email}</td>
-      </tr>`
-          : ''
-      }
-      ${
-        phone
-          ? `
-      <tr>
-        <td>Phone:</td>
-        <td>${phone}</td>
-      </tr>`
-          : ''
-      }
-      <tr>
-        <td>Address:</td>
-        <td>${address}</td>
-      </tr>
-      <tr>
-        <td>City:</td>
-        <td>${city}</td>
-      </tr>
-      <tr>
-        <td>State:</td>
-        <td>${state}</td>
-      </tr>
-      <tr>
-        <td>Zip:</td>
-        <td>${zip}</td>
-      </tr>
-    </table>
+      <p>Sincerely,<br>
+      Pana Country Club Board</p>
 
-    <p>Message:</p>
-    <p>${message}</p>
-
-    <p>Please reach out to the person at your earliest convenience using the provided contact information.</p>
-
-    <p>Sincerely,<br>
-    Pana Country Club Board</p>
-
-    </body>
-    </html>
-  `;
+      </body>
+      </html>
+    `;
 
   // setup email data with unicode symbols
   const mailOptions = {
@@ -132,14 +156,7 @@ export async function POST(req) {
   };
 
   try {
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-        throw new Error(error);
-      }
-      console.log('Message sent: %s', info.messageId);
-    });
+    await sendMailPromise(transporter, mailOptions);
     return NextResponse.json({ message: 'Your message has been sent' });
   } catch (err) {
     return new Response('Something went wrong', {
