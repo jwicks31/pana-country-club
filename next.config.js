@@ -38,6 +38,11 @@ const nextConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/index.html',
+        destination: '/',
+        permanent: false,
+      },
     ];
   },
 };
