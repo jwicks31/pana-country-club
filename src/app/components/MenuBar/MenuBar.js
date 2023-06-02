@@ -52,7 +52,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
       link: 'https://calendar.google.com/calendar/u/0/embed?src=panacountryclub@gmail.com&ctz=America/Chicago',
     },
     {
-      name: 'League Info',
+      name: 'Men\'s League Info',
       link: 'https://golf-outings.vercel.app/league/0a4edb35-4e00-4c6e-b672-c0028acda121',
     },
   ];
