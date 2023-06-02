@@ -47,8 +47,14 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
     { name: 'About Us', link: '/about' },
     { name: 'Membership', link: '/membership' },
     { name: 'Contact Us', link: '/contact' },
-    // { name: 'Club House & Bar', link: '/clubhouse' },
-    // { name: 'League Info', link: '/league' },
+    {
+      name: 'Club Calendar',
+      link: 'https://calendar.google.com/calendar/u/0/embed?src=panacountryclub@gmail.com&ctz=America/Chicago',
+    },
+    {
+      name: 'League Info',
+      link: 'https://golf-outings.vercel.app/league/0a4edb35-4e00-4c6e-b672-c0028acda121',
+    },
   ];
 
   return (
@@ -83,11 +89,6 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
                 <Link href={item.link}>{item.name}</Link>
               </li>
             ))}
-            <li>
-              <Link href="https://calendar.google.com/calendar/u/0/embed?src=panacountryclub@gmail.com&ctz=America/Chicago">
-                Club Calendar
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
