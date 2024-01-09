@@ -17,18 +17,18 @@ export default function MembershipPage() {
         ACH Form
       </a>
       <a
-        href="/2022_membership_application.pdf"
+        href="/2024_membership_application.pdf"
         alt="ACH Form"
         target="_blank"
         rel="noopener noreferrer"
       >
-        2022 Membership Application
+        2024 Membership Application
       </a>
       <div className={styles.membershipOptions}>
         <h2>Memberships</h2>
         <p>
           <span>
-            <span className={styles.bold}>Individual Membership</span> - $1100
+            <span className={styles.bold}>Individual Membership</span> - $1200
             per year
           </span>
           Enjoy the privileges of the Clubhouse, Pro Shop, and Grounds with our
@@ -39,7 +39,7 @@ export default function MembershipPage() {
         </p>
         <p>
           <span>
-            <span className={styles.bold}>Family Membership</span> - $1345 per
+            <span className={styles.bold}>Family Membership</span> - $1476 per
             year
           </span>
           Our Family Membership is perfect for married couples and their
@@ -52,7 +52,7 @@ export default function MembershipPage() {
         </p>
         <p>
           <span>
-            <span className={styles.bold}>Junior Membership</span> - $400 per
+            <span className={styles.bold}>Junior Membership</span> - $444 per
             year
           </span>{' '}
           Our Junior Membership is available to immediate family members of
@@ -92,19 +92,19 @@ export default function MembershipPage() {
         <h2>Golf Cart Options</h2>
         <p>
           <span className={styles.bold}>
-            Secure Your Cart for the Year - Only $170!
+            Secure Your Cart for the Year - Only $180!
           </span>
           Keep your golf cart safe and protected all year long with our locked
           storage shed option.
         </p>
         <p>
-          <span className={styles.bold}>Trail Fee - Only $100 Per Year!</span>
+          <span className={styles.bold}>Trail Fee - Only $120 Per Year!</span>
           If you prefer to store your cart at home, you can still enjoy the
           convenience of using it on our course with our trail fee.
         </p>
         <p>
           <span className={styles.bold}>
-            Unlimited Rental Cart Access - Only $300!
+            Unlimited Rental Cart Access - Only $324!
           </span>
           Upgrade your game with our unlimited rental cart option for the entire
           season. No need to worry about bringing your own cart.
