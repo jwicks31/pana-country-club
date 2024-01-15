@@ -1,8 +1,7 @@
 'use client';
-import { useState } from 'react';
-import Head from 'next/head';
 import { MenuBar } from '../components/MenuBar/MenuBar';
 import styles from './page.module.css';
+import Image from 'next/image';
 
 export default function MembershipPage() {
   return (
@@ -109,6 +108,12 @@ export default function MembershipPage() {
           Upgrade your game with our unlimited rental cart option for the entire
           season. No need to worry about bringing your own cart.
         </p>
+        <Image src='/2024-ach-monthly-pay.png'
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: '100%', height: 'auto' }}
+        />
       </div>
     </main>
   );
