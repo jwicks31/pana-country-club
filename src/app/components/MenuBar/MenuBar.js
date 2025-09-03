@@ -67,7 +67,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
         <div className={styles.logo}>
           <Link href="/">
             <Image
-              src="/logo-cropped.png"
+              src="/logo.png"
               alt="Pana Country Club Logo"
               width={68}
               height={50}
@@ -96,7 +96,7 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
       <div className={styles.mobileLogoBar} />
       <div className={styles.mobileLogo}>
         <Image
-          src="/logo-cropped.png"
+          src="/logo.png"
           alt="Pana Country Club Logo"
           width={68}
           height={50}
