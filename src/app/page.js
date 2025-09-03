@@ -60,7 +60,7 @@ export default function Home() {
           className={className(styles.imageLogo, {
             [styles.imageHidden]: removeImage,
           })}
-          src="/logo.png"
+          src="/new-logo.png"
           alt="Pana Country Club Logo"
           height={400}
           width={400}
