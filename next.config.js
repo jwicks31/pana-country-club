@@ -1,10 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
-    domains: ['openweathermap.org'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'openweathermap.org',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   async redirects() {
     return [
