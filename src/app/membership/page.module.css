@@ -56,6 +56,34 @@
   color: #1a1a1a;
 }
 
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pdfButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.pdfButton:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
 /* Section Styles */
 .section {
   width: 100%;
@@ -177,6 +205,7 @@
   border-radius: 8px;
   padding: 1.5rem;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .cartOption:hover {
@@ -279,6 +308,232 @@
   transform: translateY(-2px);
 }
 
+/* Section Hint */
+.sectionHint {
+  text-align: center;
+  color: var(--primary-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Clickable Cards */
+.card {
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-family: inherit;
+  text-align: center;
+}
+
+.cardSelected {
+  border-color: var(--accent-color);
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.cardCheck {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: var(--accent-color);
+}
+
+/* Clickable Cart Options */
+.cartOption {
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-family: inherit;
+  text-align: left;
+}
+
+.cartOptionSelected {
+  border-color: var(--accent-color);
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.cartCheck {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: var(--accent-color);
+}
+
+/* Discount Banner Clickable */
+.discountBanner {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.discountBanner:hover {
+  background-color: rgba(212, 175, 55, 0.15);
+}
+
+.discountBannerActive {
+  border-width: 2px;
+  background-color: rgba(212, 175, 55, 0.15);
+}
+
+/* Estimate Flyout */
+.estimateFlyout {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(40, 40, 40, 0.98));
+  border-top: 2px solid var(--accent-color);
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.estimateHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.estimateTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-color);
+}
+
+.estimateClear {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.estimateClear:hover {
+  opacity: 1;
+}
+
+.estimateContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.estimateRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.estimateDiscount {
+  color: #4ade80;
+}
+
+.estimateHint {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  opacity: 0.6;
+  text-align: center;
+  margin: 0.5rem 0 0;
+}
+
+.estimateTotal {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 0.75rem;
+}
+
+.estimateTotal span:first-child {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.estimateTotal span:last-child {
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.estimateApplyBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent3-color));
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.estimateApplyBtn:hover {
+  background: linear-gradient(135deg, var(--accent2-color), var(--accent-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+  color: #1a1a1a;
+}
+
+/* Desktop: Sidebar flyout - positioned relative to content */
+@media (min-width: 1100px) {
+  .estimateFlyout {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(75% + 100px);
+    right: auto;
+    bottom: auto;
+    width: 260px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50%) translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(-50%) translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
 /* Mobile and Tablet */
 @media (max-width: 768px) {
   .main {
@@ -294,9 +549,23 @@
     padding: 0 1rem;
   }
 
+  .heroButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .applicationButton {
     padding: 0.85rem 1.5rem;
     font-size: 0.9rem;
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .pdfButton {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
   }
 
   .cardsGrid {
@@ -325,5 +594,9 @@
     width: 100%;
     max-width: 280px;
     text-align: center;
+  }
+
+  .ctaSection {
+    margin-bottom: 10rem;
   }
 }
