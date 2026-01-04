@@ -112,13 +112,10 @@ export default function Home() {
           </div>
           <div className={styles.membershipImage}>
             <Image
-              src="/menu.png"
+              src="/pana_country_club_menu.png"
               alt="Pana Country Club Menu Picture"
               fill
               priority
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
             />
           </div>
           <div className={styles.membershipImage}>
