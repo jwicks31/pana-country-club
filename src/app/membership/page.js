@@ -1,108 +1,144 @@
 'use client';
 import { MenuBar } from '../components/MenuBar/MenuBar';
 import styles from './page.module.css';
-import Image from 'next/image';
+import Link from 'next/link';
+import { IoDocumentTextOutline, IoPersonOutline, IoPeopleOutline, IoSchoolOutline, IoCarOutline, IoLocationOutline } from 'react-icons/io5';
 
 export default function MembershipPage() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <main className={styles.main}>
-      <MenuBar useScroll={false} openMenu={true} />
-      <a
-        href={encodeURIComponent(
-          '/Pana Country Club New Member Application 2026.pdf'
-        )}
-        alt="Membership Application Form"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {`${new Date().getFullYear()} Membership Application`}
-      </a>
-      <div className={styles.membershipOptions}>
-        <h2>Memberships</h2>
-        <p>
-          <span>
-            <span className={styles.bold}>Individual Membership</span> - $1200
-            per year
-          </span>
-          Enjoy the privileges of the Clubhouse, Pro Shop, and Grounds with our
-          Individual Membership. This membership is perfect for those who have
-          attained the age of eighteen and wish to enjoy the benefits of the
-          Pana Country Club. Green fees are required for family members or
-          guests who play golf.
+      <MenuBar openMenu={true} />
+
+      {/* Hero Section with CTA */}
+      <div className={styles.hero}>
+        <h1>Become a Member</h1>
+        <p className={styles.heroSubtitle}>
+          Join our community and enjoy golf, dining, and social events with friends and family
         </p>
-        <p>
-          <span>
-            <span className={styles.bold}>Family Membership</span> - $1476 per
-            year
-          </span>
-          Our Family Membership is perfect for married couples and their
-          children who want to enjoy the benefits of the Pana Country Club. This
-          membership includes the immediate family, including spouse and
-          children up to the age of 18 &#40;or 24 if they are enrolled in
-          school&#41;. Family members and their immediate family may also enjoy
-          the privileges of the clubhouse, Pro Shop, and the Grounds. Green fees
-          are required for family members or guests who play golf.
-        </p>
-        <p>
-          <span>
-            <span className={styles.bold}>Junior Membership</span> - $444 per
-            year
-          </span>{' '}
-          Our Junior Membership is available to immediate family members of
-          family membership holders who have attained the age of eighteen but
-          not exceeding twenty-one years of age if said persons are enrolled in
-          a program seeking an academic degree at an accredited post-secondary,
-          degree-granting institution. Junior members may enjoy the privileges
-          of the Clubhouse, Pro Shop, and the Grounds.
-        </p>
-        <p>
-          <span>
-            <span className={styles.bold}>Out-of-Town Discount</span> - $50 off
-            a Family or Individual Membership
-          </span>
-          This discount is available to any member who lives outside of Pana or
-          the Pana School District.
-        </p>
-        <p>
-          <span>
-            <span className={styles.bold}>Non-Resident Membership</span> - 50%
-            of Regular Fee &#40;Membership Only -- Not Storage&#41;
-          </span>
-          Our Non-Resident Membership is available to single or married persons
-          &#40;and their immediate family&#41; living thirty-five miles or more
-          from the Pana Country Club. Non-resident members will have the same
-          privileges of the membership class for which they purchase/qualify.
-          For example, a single non-resident member may enjoy the privileges of
-          the clubhouse, Pro Shop, and the Grounds. A social non-resident member
-          may only enjoy the privileges of the Clubhouse and the Pro Shop. We
-          hope you&apos;ll consider becoming a member of the Pana Country Club,
-          where you can enjoy golf, dining, and social events with friends and
-          family. Contact us today to learn more about our membership options
-          and to schedule a tour of our facilities.
-        </p>
+        <a
+          href={encodeURIComponent('/Pana Country Club New Member Application 2026.pdf')}
+          className={styles.applicationButton}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <IoDocumentTextOutline size={24} />
+          <span>{currentYear} Membership Application</span>
+        </a>
       </div>
-      <div className={styles.cartOptions}>
-        <h2>Golf Cart Options</h2>
-        <p>
-          <span className={styles.bold}>
-            Secure Your Cart for the Year - Only $180!
-          </span>
-          Keep your golf cart safe and protected all year long with our locked
-          storage shed option.
-        </p>
-        <p>
-          <span className={styles.bold}>Trail Fee - Only $120 Per Year!</span>
-          If you prefer to store your cart at home, you can still enjoy the
-          convenience of using it on our course with our trail fee.
-        </p>
-        <p>
-          <span className={styles.bold}>
-            Unlimited Rental Cart Access - Only $324!
-          </span>
-          Upgrade your game with our unlimited rental cart option for the entire
-          season. No need to worry about bringing your own cart.
-        </p>
+
+      {/* Membership Cards */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Membership Options</h2>
+        <div className={styles.cardsGrid}>
+          <div className={styles.card}>
+            <div className={styles.cardIcon}>
+              <IoPersonOutline size={32} />
+            </div>
+            <h3>Individual Membership</h3>
+            <div className={styles.price}>$1,200<span>/year</span></div>
+            <p>
+              Perfect for individuals 18+ who want full access to the Clubhouse,
+              Pro Shop, and Grounds. Green fees required for guests.
+            </p>
+          </div>
+
+          <div className={`${styles.card} ${styles.cardFeatured}`}>
+            <div className={styles.cardBadge}>Most Popular</div>
+            <div className={styles.cardIcon}>
+              <IoPeopleOutline size={32} />
+            </div>
+            <h3>Family Membership</h3>
+            <div className={styles.price}>$1,476<span>/year</span></div>
+            <p>
+              Includes spouse and children up to 18 (or 24 if enrolled in school).
+              Full privileges for the whole family.
+            </p>
+          </div>
+
+          <div className={styles.card}>
+            <div className={styles.cardIcon}>
+              <IoSchoolOutline size={32} />
+            </div>
+            <h3>Junior Membership</h3>
+            <div className={styles.price}>$444<span>/year</span></div>
+            <p>
+              For family members aged 18-21 enrolled in an accredited degree program.
+              Full access to all club facilities.
+            </p>
+          </div>
+
+          <div className={styles.card}>
+            <div className={styles.cardIcon}>
+              <IoLocationOutline size={32} />
+            </div>
+            <h3>Non-Resident Membership</h3>
+            <div className={styles.price}>50% off<span> regular fees</span></div>
+            <p>
+              For members living 35+ miles from the club. Same privileges as your
+              membership class at half the price.
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.discountBanner}>
+          <strong>Out-of-Town Discount:</strong> $50 off Family or Individual Membership
+          for those living outside Pana or the Pana School District.
+        </div>
+      </div>
+
+      {/* Golf Cart Options */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Golf Cart Options</h2>
+        <div className={styles.cartGrid}>
+          <div className={styles.cartOption}>
+            <IoCarOutline size={28} />
+            <div>
+              <h4>Cart Storage</h4>
+              <span className={styles.cartPrice}>$180/year</span>
+              <p>Secure your cart in our locked storage shed year-round.</p>
+            </div>
+          </div>
+
+          <div className={styles.cartOption}>
+            <IoCarOutline size={28} />
+            <div>
+              <h4>Trail Fee</h4>
+              <span className={styles.cartPrice}>$120/year</span>
+              <p>Store at home and use your cart on our course.</p>
+            </div>
+          </div>
+
+          <div className={styles.cartOption}>
+            <IoCarOutline size={28} />
+            <div>
+              <h4>Unlimited Rental</h4>
+              <span className={styles.cartPrice}>$324/year</span>
+              <p>Unlimited access to rental carts for the entire season.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className={styles.ctaSection}>
+        <h3>Ready to Join?</h3>
+        <p>Download the application or contact us to learn more and schedule a tour.</p>
+        <div className={styles.ctaButtons}>
+          <a
+            href={encodeURIComponent('/Pana Country Club New Member Application 2026.pdf')}
+            className={styles.ctaPrimary}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download Application
+          </a>
+          <Link href="/contact" className={styles.ctaSecondary}>
+            Contact Us
+          </Link>
+        </div>
       </div>
     </main>
-  )
+  );
 }

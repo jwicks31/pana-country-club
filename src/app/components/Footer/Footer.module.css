@@ -1,49 +1,26 @@
-
-.container {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background-complement-color-light);
-  color: white;
-}
-
-.main {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.main ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-}
-
-.main li {
-  margin: .75rem;
-}
-
-.contactContainer {
-  width: 100%;
+.footer {
   font-family: var(--font-raleway);
-  text-transform: uppercase;
 }
 
-.churchImage {
+/* Contact Banner */
+.contactBanner {
+  width: 100%;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.bannerContent {
   color: var(--accent-color);
   width: 100%;
-  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-self: center;
   align-items: center;
+  padding: 4rem 2rem;
 }
 
-.churchImage:before {
+.bannerContent::before {
   content: "";
   position: absolute;
   top: 0;
@@ -53,44 +30,184 @@
   background-image: url('/church-top-cropped.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-color: #2a8c47; */
-  /* background: linear-gradient(to top right, var(--accent3-color), rgba(52, 69, 222, 0.5), var(--accent3-color)); */
-  opacity: 0.75;
-  z-index: -1; /* Set the z-index to position the background layer behind the content */
+  background-position: center;
+  opacity: 0.6;
+  z-index: 0;
 }
 
-.contactContainer h2 {
-  font-weight: 200;
-  padding: 2rem;
+.bannerContent::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.3) 0%, rgba(26, 26, 26, 0.6) 100%);
+  z-index: 0;
 }
 
-.contactContainer span {
-  font-family: 'Pinyon Script', cursive;
+.bannerContent h2 {
+  font-weight: 300;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 3px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.contactContainer p {
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border-bottom: rgb(var(--background-start-rgb)) 2px solid;
-  border-top: rgb(var(--background-start-rgb)) 2px solid;
+.bannerContent h2 span {
+  font-family: var(--font-antic-slab);
+  font-style: italic;
+  font-weight: 400;
 }
 
-.address {
+.bannerContent p {
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  text-align: center;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.bannerContent p::before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--accent-color);
+  margin: 0 auto 1rem;
+}
+
+/* Main Footer */
+.footerMain {
+  background-color: var(--background-complement-color-light);
+  padding: 2.5rem 2rem;
+}
+
+.footerColumns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerColumn h3 {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.footerColumn ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerColumn li {
+  margin: 0.5rem 0;
+}
+
+.footerColumn a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footerColumn a:hover {
+  color: var(--accent-color);
+}
+
+/* Contact Info */
+.contactInfo p {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  margin: 0.35rem 0;
+}
+
+.phone {
+  margin-top: 0.75rem !important;
+  font-weight: 600;
+}
+
+.email {
+  font-size: 0.85rem !important;
+  word-break: break-all;
+}
+
+/* Bottom Bar */
+.bottomBar {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 1rem;
   background-color: var(--background-complement-color);
-  color: white;
-  font-family: var(--font-raleway);
-  font-size: .75rem;
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  text-align: center;
 }
 
-@media (max-width: 1023px) {
-  .main {
-    flex-direction: column;
+.separator {
+  opacity: 0.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .footerColumns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
   }
-  .contactContainer p {
-    border: none;
+}
+
+@media (max-width: 600px) {
+  .footerColumns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footerColumn h3 {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .bannerContent {
+    padding: 3rem 1rem;
+  }
+
+  .bannerContent h2 {
+    font-size: 1.5rem;
+  }
+
+  .bannerContent p {
+    font-size: 0.75rem;
+    padding: 0.75rem 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .bannerContent p::before {
+    width: 40px;
+    margin-bottom: 0.75rem;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .separator {
+    display: none;
   }
 }
