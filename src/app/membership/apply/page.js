@@ -1,36 +1,16 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { IoSendOutline, IoArrowBackOutline, IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 import { MenuBar } from '../../components/MenuBar/MenuBar';
 import styles from './page.module.css';
+import { calculatePriceBreakdown, CART_OPTIONS } from '../pricingConfig';
 
 const currentYear = new Date().getFullYear();
 
-// Membership pricing
-const MEMBERSHIP_PRICES = {
-  full: {
-    single: 1200,
-    family: 1476,
-  },
-  junior: {
-    single: 444,
-    family: 444,
-  },
-};
-
-const OUT_OF_TOWN_DISCOUNT = 50;
-const INTRODUCTORY_DISCOUNT = 0.5; // 50% off
-const NON_RESIDENT_DISCOUNT = 0.5; // 50% off for those living 35+ miles away
-
-// Cart options pricing
-const CART_OPTIONS = {
-  storage: { label: 'Cart Storage', price: 180, description: 'Secure your cart in our locked storage shed year-round' },
-  trailFee: { label: 'Trail Fee', price: 120, description: 'Store at home and use your cart on our course' },
-  unlimitedRental: { label: 'Unlimited Rental', price: 324, description: 'Unlimited access to rental carts for the entire season' },
-};
-
-export default function MembershipApplicationPage() {
+function MembershipApplicationContent() {
+  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -105,6 +85,32 @@ export default function MembershipApplicationPage() {
     agreeToTerms: false,
   });
 
+  // Read URL params to pre-fill form selections from membership calculator
+  useEffect(() => {
+    const membershipType = searchParams.get('type');
+    const householdType = searchParams.get('household');
+    const outOfTown = searchParams.get('outOfTown') === 'true';
+    const introductoryDiscount = searchParams.get('intro') === 'true';
+    const nonResidentDiscount = searchParams.get('nonResident') === 'true';
+    const cartStorage = searchParams.get('cartStorage') === 'true';
+    const cartTrailFee = searchParams.get('cartTrailFee') === 'true';
+    const cartUnlimitedRental = searchParams.get('cartUnlimitedRental') === 'true';
+
+    if (membershipType || householdType) {
+      setFormData((prev) => ({
+        ...prev,
+        ...(membershipType && { membershipType }),
+        ...(householdType && { householdType }),
+        outOfTown,
+        introductoryDiscount,
+        nonResidentDiscount,
+        cartStorage,
+        cartTrailFee,
+        cartUnlimitedRental,
+      }));
+    }
+  }, [searchParams]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -129,77 +135,8 @@ export default function MembershipApplicationPage() {
     });
   };
 
-  // Calculate membership cost
-  const priceBreakdown = useMemo(() => {
-    const { membershipType, householdType, outOfTown, introductoryDiscount, nonResidentDiscount, paymentFrequency, cartStorage, cartTrailFee, cartUnlimitedRental } = formData;
-
-    if (!membershipType || !householdType) {
-      return null;
-    }
-
-    const basePrice = MEMBERSHIP_PRICES[membershipType]?.[householdType] || 0;
-    const outOfTownDiscount = outOfTown ? OUT_OF_TOWN_DISCOUNT : 0;
-    const membershipAfterOutOfTown = basePrice - outOfTownDiscount;
-
-    // Calculate cart options total
-    let cartTotal = 0;
-    const selectedCarts = [];
-    if (cartStorage) {
-      cartTotal += CART_OPTIONS.storage.price;
-      selectedCarts.push({ ...CART_OPTIONS.storage, key: 'storage' });
-    }
-    if (cartTrailFee) {
-      cartTotal += CART_OPTIONS.trailFee.price;
-      selectedCarts.push({ ...CART_OPTIONS.trailFee, key: 'trailFee' });
-    }
-    if (cartUnlimitedRental) {
-      cartTotal += CART_OPTIONS.unlimitedRental.price;
-      selectedCarts.push({ ...CART_OPTIONS.unlimitedRental, key: 'unlimitedRental' });
-    }
-
-    const subtotal = membershipAfterOutOfTown + cartTotal;
-
-    // Apply either introductory or non-resident discount (mutually exclusive, both 50%)
-    // Introductory applies to membership + cart options
-    // Non-Resident only applies to membership (not cart options)
-    const introDiscount = introductoryDiscount ? subtotal * INTRODUCTORY_DISCOUNT : 0;
-    const nonResDiscount = nonResidentDiscount ? membershipAfterOutOfTown * NON_RESIDENT_DISCOUNT : 0;
-    const annualTotal = subtotal - introDiscount - nonResDiscount;
-
-    let breakdown = {
-      basePrice,
-      outOfTownDiscount,
-      membershipAfterOutOfTown,
-      cartTotal,
-      selectedCarts,
-      subtotal,
-      introDiscount,
-      introductoryDiscount,
-      nonResDiscount,
-      nonResidentDiscount,
-      annualTotal,
-      membershipLabel: membershipType === 'full' ? 'Full' : 'Junior',
-      householdLabel: householdType === 'single' ? 'Individual' : 'Family',
-    };
-
-    if (paymentFrequency === 'annually') {
-      breakdown.paymentAmount = annualTotal;
-      breakdown.paymentLabel = 'Annual Payment';
-      breakdown.paymentNote = 'Due by March 1st';
-    } else if (paymentFrequency === 'semi-annually') {
-      breakdown.paymentAmount = annualTotal / 2;
-      breakdown.paymentLabel = 'Semi-Annual Payment';
-      breakdown.paymentNote = '2 payments of';
-      breakdown.numberOfPayments = 2;
-    } else if (paymentFrequency === 'monthly') {
-      breakdown.paymentAmount = annualTotal / 12;
-      breakdown.paymentLabel = 'Monthly Payment';
-      breakdown.paymentNote = '12 payments of';
-      breakdown.numberOfPayments = 12;
-    }
-
-    return breakdown;
-  }, [formData]);
+  // Calculate membership cost using shared function
+  const priceBreakdown = calculatePriceBreakdown(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -736,51 +673,89 @@ export default function MembershipApplicationPage() {
         {/* Golf Cart Options */}
         <div className={styles.formSection}>
           <h2>Golf Cart Options</h2>
-          <p className={styles.sectionHint}>Select any cart options you would like to add to your membership</p>
+          <p className={styles.sectionHint}>Select a cart option to add to your membership (optional)</p>
           <div className={styles.cartOptionsGrid}>
             <label className={styles.cartOptionLabel}>
               <input
-                type="checkbox"
-                name="cartStorage"
+                type="radio"
+                name="cartOption"
+                value="storage"
                 checked={formData.cartStorage}
-                onChange={handleChange}
+                onChange={() => setFormData(prev => ({
+                  ...prev,
+                  cartStorage: true,
+                  cartTrailFee: false,
+                  cartUnlimitedRental: false,
+                }))}
               />
               <div className={styles.cartOptionContent}>
                 <div className={styles.cartOptionHeader}>
-                  <span className={styles.cartOptionName}>Cart Storage</span>
-                  <span className={styles.cartOptionPrice}>$180/year</span>
+                  <span className={styles.cartOptionName}>{CART_OPTIONS.storage.label}</span>
+                  <span className={styles.cartOptionPrice}>${CART_OPTIONS.storage.price}/year</span>
                 </div>
-                <p className={styles.cartOptionDesc}>Secure your cart in our locked storage shed year-round</p>
+                <p className={styles.cartOptionDesc}>{CART_OPTIONS.storage.description}</p>
               </div>
             </label>
             <label className={styles.cartOptionLabel}>
               <input
-                type="checkbox"
-                name="cartTrailFee"
+                type="radio"
+                name="cartOption"
+                value="trailFee"
                 checked={formData.cartTrailFee}
-                onChange={handleChange}
+                onChange={() => setFormData(prev => ({
+                  ...prev,
+                  cartStorage: false,
+                  cartTrailFee: true,
+                  cartUnlimitedRental: false,
+                }))}
               />
               <div className={styles.cartOptionContent}>
                 <div className={styles.cartOptionHeader}>
-                  <span className={styles.cartOptionName}>Trail Fee</span>
-                  <span className={styles.cartOptionPrice}>$120/year</span>
+                  <span className={styles.cartOptionName}>{CART_OPTIONS.trailFee.label}</span>
+                  <span className={styles.cartOptionPrice}>${CART_OPTIONS.trailFee.price}/year</span>
                 </div>
-                <p className={styles.cartOptionDesc}>Store at home and use your cart on our course</p>
+                <p className={styles.cartOptionDesc}>{CART_OPTIONS.trailFee.description}</p>
               </div>
             </label>
             <label className={styles.cartOptionLabel}>
               <input
-                type="checkbox"
-                name="cartUnlimitedRental"
+                type="radio"
+                name="cartOption"
+                value="unlimitedRental"
                 checked={formData.cartUnlimitedRental}
-                onChange={handleChange}
+                onChange={() => setFormData(prev => ({
+                  ...prev,
+                  cartStorage: false,
+                  cartTrailFee: false,
+                  cartUnlimitedRental: true,
+                }))}
               />
               <div className={styles.cartOptionContent}>
                 <div className={styles.cartOptionHeader}>
-                  <span className={styles.cartOptionName}>Unlimited Rental</span>
-                  <span className={styles.cartOptionPrice}>$324/year</span>
+                  <span className={styles.cartOptionName}>{CART_OPTIONS.unlimitedRental.label}</span>
+                  <span className={styles.cartOptionPrice}>${CART_OPTIONS.unlimitedRental.price}/year</span>
                 </div>
-                <p className={styles.cartOptionDesc}>Unlimited access to rental carts for the entire season</p>
+                <p className={styles.cartOptionDesc}>{CART_OPTIONS.unlimitedRental.description}</p>
+              </div>
+            </label>
+            <label className={styles.cartOptionLabel}>
+              <input
+                type="radio"
+                name="cartOption"
+                value="none"
+                checked={!formData.cartStorage && !formData.cartTrailFee && !formData.cartUnlimitedRental}
+                onChange={() => setFormData(prev => ({
+                  ...prev,
+                  cartStorage: false,
+                  cartTrailFee: false,
+                  cartUnlimitedRental: false,
+                }))}
+              />
+              <div className={styles.cartOptionContent}>
+                <div className={styles.cartOptionHeader}>
+                  <span className={styles.cartOptionName}>No Cart Option</span>
+                </div>
+                <p className={styles.cartOptionDesc}>I don&apos;t need a cart option at this time</p>
               </div>
             </label>
           </div>
@@ -1070,5 +1045,13 @@ export default function MembershipApplicationPage() {
         </div>
       )}
     </main>
+  );
+}
+
+export default function MembershipApplicationPage() {
+  return (
+    <Suspense fallback={<div className={styles.main}><MenuBar openMenu={true} /><div style={{ textAlign: 'center', padding: '4rem' }}>Loading...</div></div>}>
+      <MembershipApplicationContent />
+    </Suspense>
   );
 }
