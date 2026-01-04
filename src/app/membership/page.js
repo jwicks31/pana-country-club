@@ -8,20 +8,14 @@ export default function MembershipPage() {
     <main className={styles.main}>
       <MenuBar useScroll={false} openMenu={true} />
       <a
-        href="/pcc_auth_form_ach.pdf"
-        alt="ACH Form"
+        href={encodeURIComponent(
+          '/Pana Country Club New Member Application 2026.pdf'
+        )}
+        alt="Membership Application Form"
         target="_blank"
         rel="noopener noreferrer"
       >
-        ACH Form
-      </a>
-      <a
-        href="/2024_membership_application.pdf"
-        alt="ACH Form"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        2024 Membership Application
+        {`${new Date().getFullYear()} Membership Application`}
       </a>
       <div className={styles.membershipOptions}>
         <h2>Memberships</h2>
@@ -108,13 +102,7 @@ export default function MembershipPage() {
           Upgrade your game with our unlimited rental cart option for the entire
           season. No need to worry about bringing your own cart.
         </p>
-        <Image src='/2024-ach-monthly-pay.png'
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: '100%', height: 'auto' }}
-        />
       </div>
     </main>
-  );
+  )
 }
