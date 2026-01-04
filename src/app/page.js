@@ -1,18 +1,16 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import Link from 'next/link';
-import { Inter } from 'next/font/google';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { AiOutlineArrowDown } from 'react-icons/ai';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import className from 'classnames';
+import Image from 'next/image';
+import Link from 'next/link';
+import { AiOutlineArrowDown } from 'react-icons/ai';
+import { IoCalendarOutline, IoPeopleOutline, IoRestaurantOutline } from 'react-icons/io5';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
-import styles from './page.module.css';
 import { MenuBar } from './components/MenuBar/MenuBar';
-const inter = Inter({ subsets: ['latin'] });
+import styles from './page.module.css';
 
 const duration = 300;
 
@@ -66,19 +64,37 @@ export default function Home() {
           width={400}
           priority
         />
-        <Image
-          className={className(styles.imageText, {
+        <h1
+          className={className(styles.heroText, {
             [styles.imageHidden]: removeImage,
           })}
-          src="/home-text.png"
-          alt="Pana Country Club Logo"
-          height={178}
-          width={1274}
-          priority
-        />
+        >
+          Discover the joy of golfing in a friendly,<br />
+          welcoming community at <span>Pana Country Club</span>.
+        </h1>
         <Image src="/hole-7.jpg" alt="Pana Country Club Hole 7" fill priority />
-        <div className={styles.scollText}>
-          Scoll To Explore <AiOutlineArrowDown size={50} />
+
+        {/* Hero Quick Action Buttons */}
+        <div className={styles.heroActions}>
+          <Link href="/menu" className={styles.heroButton}>
+            <IoRestaurantOutline size={24} />
+            <span>View Menu</span>
+          </Link>
+          <Link href="/membership" className={styles.heroButtonPrimary}>
+            <IoPeopleOutline size={24} />
+            <span>Become a Member</span>
+          </Link>
+          <Link
+            href="https://calendar.google.com/calendar/u/0/embed?src=panacountryclub@gmail.com&ctz=America/Chicago"
+            className={styles.heroButton}
+          >
+            <IoCalendarOutline size={24} />
+            <span>Club Calendar</span>
+          </Link>
+        </div>
+
+        <div className={styles.scrollText}>
+          Scroll To Explore <AiOutlineArrowDown size={20} />
         </div>
       </div>
       <div className={styles.descriptionContainer}>
@@ -91,48 +107,8 @@ export default function Home() {
           water hazards and sloped greens mixed throughout. The Pana Country
           Club facility also includes a chipping and putting green.
         </p>
-
-        {/* <p>
-          Don&apos;t just take our word for it. Here&apos;s what some of our
-          members have to say:{' '}
-        </p> */}
       </div>
       <div ref={membershipContainerRef} className={styles.membershipContainer}>
-        <div className={styles.membershipImages}>
-          <div className={styles.membershipImage}>
-            <Image
-              src="/grill.jpg"
-              alt="Pana Country Club Grill"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </div>
-          <div className={styles.membershipImage}>
-            <Image
-              src="/menu.png"
-              alt="Pana Country Club Menu Picture"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </div>
-          <div className={styles.membershipImage}>
-            <Image
-              src="/banquet.jpg"
-              alt="Pana Country Club Banquet Area"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </div>
-        </div>
         <div className={styles.cloudImage}>
           <p>
             <Transition

@@ -1,119 +1,41 @@
 'use client';
 import { useState } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/navigation';
+import { IoLocationOutline, IoCallOutline, IoMailOutline, IoLogoFacebook, IoSendOutline } from 'react-icons/io5';
 import { MenuBar } from '../components/MenuBar/MenuBar';
 import styles from './page.module.css';
 
 const stateOptions = [
-  'AL',
-  'AK',
-  'AZ',
-  'AR',
-  'CA',
-  'CO',
-  'CT',
-  'DE',
-  'FL',
-  'GA',
-  'HI',
-  'ID',
-  'IL',
-  'IN',
-  'IA',
-  'KS',
-  'KY',
-  'LA',
-  'ME',
-  'MD',
-  'MA',
-  'MI',
-  'MN',
-  'MS',
-  'MO',
-  'MT',
-  'NE',
-  'NV',
-  'NH',
-  'NJ',
-  'NM',
-  'NY',
-  'NC',
-  'ND',
-  'OH',
-  'OK',
-  'OR',
-  'PA',
-  'RI',
-  'SC',
-  'SD',
-  'TN',
-  'TX',
-  'UT',
-  'VT',
-  'VA',
-  'WA',
-  'WV',
-  'WI',
-  'WY',
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
 ];
 
 const ContactForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('IL');
-  const [postalCode, setPostalCode] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [comment, setComment] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    city: '',
+    state: 'IL',
+    postalCode: '',
+    email: '',
+    phone: '',
+    comment: '',
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
-  };
-
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
-  };
-
-  const handleStateChange = (event) => {
-    setState(event.target.value);
-  };
-
-  const handlePostalCodeChange = (event) => {
-    setPostalCode(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
-  };
-
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const validateForm = () => {
-    if (!email && !phone) {
-      return false;
-    } else {
-      return true;
-    }
+    return formData.email || formData.phone;
   };
 
   const handleSubmit = async (e) => {
@@ -127,14 +49,14 @@ const ContactForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: { firstName, lastName },
-          address,
-          city,
-          state,
-          postalCode,
-          email,
-          phone,
-          message: comment,
+          name: { firstName: formData.firstName, lastName: formData.lastName },
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          postalCode: formData.postalCode,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.comment,
         }),
       });
 
@@ -150,62 +72,65 @@ const ContactForm = () => {
   };
 
   return (
-    <div className={styles.contactForm}>
-      <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
-        <fieldset className={styles.section}>
-          <legend>Contact Information</legend>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="firstName">First Name:</label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.formSection}>
+        <h3 className={styles.sectionTitle}>Your Information</h3>
+        <div className={styles.formGrid}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="firstName">First Name *</label>
             <input
               type="text"
               id="firstName"
               name="firstName"
-              value={firstName}
-              onChange={handleFirstNameChange}
+              value={formData.firstName}
+              onChange={handleChange}
               required
+              placeholder="John"
             />
           </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="lastName">Last Name:</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="lastName">Last Name *</label>
             <input
               type="text"
               id="lastName"
               name="lastName"
-              value={lastName}
-              onChange={handleLastNameChange}
+              value={formData.lastName}
+              onChange={handleChange}
               required
+              placeholder="Smith"
             />
           </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="address">Address:</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="address">Address *</label>
             <input
               type="text"
               id="address"
               name="address"
-              value={address}
-              onChange={handleAddressChange}
+              value={formData.address}
+              onChange={handleChange}
               required
+              placeholder="123 Main Street"
             />
           </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="city">City:</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="city">City *</label>
             <input
               type="text"
               id="city"
               name="city"
-              value={city}
-              onChange={handleCityChange}
+              value={formData.city}
+              onChange={handleChange}
               required
+              placeholder="Pana"
             />
           </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="state">State:</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="state">State *</label>
             <select
               id="state"
               name="state"
-              value={state}
-              onChange={handleStateChange}
+              value={formData.state}
+              onChange={handleChange}
               required
             >
               {stateOptions.map((stateCode) => (
@@ -215,71 +140,142 @@ const ContactForm = () => {
               ))}
             </select>
           </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="postalCode">Postal Code:</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="postalCode">Postal Code *</label>
             <input
               type="text"
               id="postalCode"
               name="postalCode"
-              value={postalCode}
-              onChange={handlePostalCodeChange}
+              value={formData.postalCode}
+              onChange={handleChange}
               required
+              placeholder="62557"
             />
           </div>
-        </fieldset>
-        <fieldset className={styles.section}>
-          <legend>How Should We Contact You</legend>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="email">Email:</label>
+        </div>
+      </div>
+
+      <div className={styles.formSection}>
+        <h3 className={styles.sectionTitle}>Contact Method</h3>
+        <p className={styles.sectionHint}>Please provide at least one contact method</p>
+        <div className={styles.formGrid}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
-              value={email}
-              onChange={handleEmailChange}
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
             />
           </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="phone">Phone:</label>
+          <div className={styles.inputGroup}>
+            <label htmlFor="phone">Phone</label>
             <input
               type="tel"
               id="phone"
               name="phone"
-              value={phone}
-              onChange={handlePhoneChange}
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="(217) 555-1234"
             />
           </div>
-        </fieldset>
-        <fieldset className={styles.section}>
-          <legend>Additional Information</legend>
-          <div className={styles.inputWrapper}>
-            <label htmlFor="comment">Comment:</label>
-            <textarea
-              id="comment"
-              name="comment"
-              value={comment}
-              onChange={handleCommentChange}
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={!validateForm()}
-          >
-            Send
-          </button>
-        </fieldset>
-      </form>
-    </div>
+        </div>
+      </div>
+
+      <div className={styles.formSection}>
+        <h3 className={styles.sectionTitle}>Your Message</h3>
+        <div className={styles.inputGroup}>
+          <label htmlFor="comment">Message *</label>
+          <textarea
+            id="comment"
+            name="comment"
+            value={formData.comment}
+            onChange={handleChange}
+            required
+            rows={5}
+            placeholder="How can we help you? Tell us about your interest in the club, questions about membership, or anything else..."
+          />
+        </div>
+      </div>
+
+      {error && <p className={styles.error}>{error}</p>}
+
+      <button
+        type="submit"
+        className={styles.submitButton}
+        disabled={!validateForm() || isLoading}
+      >
+        {isLoading ? (
+          'Sending...'
+        ) : (
+          <>
+            <IoSendOutline size={20} />
+            <span>Send Message</span>
+          </>
+        )}
+      </button>
+    </form>
   );
 };
 
 export default function ContactPage() {
   return (
     <main className={styles.main}>
-      <MenuBar useScroll={false} openMenu={true} />
-      <ContactForm />
+      <MenuBar openMenu={true} />
+
+      {/* Header */}
+      <div className={styles.header}>
+        <h1>Contact Us</h1>
+        <p className={styles.subtitle}>
+          We&apos;d love to hear from you. Reach out with questions or to schedule a visit.
+        </p>
+      </div>
+
+      {/* Contact Info Cards */}
+      <div className={styles.contactInfo}>
+        <div className={styles.infoCard}>
+          <IoLocationOutline size={28} />
+          <div>
+            <h3>Visit Us</h3>
+            <p>411 E 9th St</p>
+            <p>Pana, IL 62557</p>
+          </div>
+        </div>
+        <div className={styles.infoCard}>
+          <IoCallOutline size={28} />
+          <div>
+            <h3>Call Us</h3>
+            <p>(217) 562-2641</p>
+          </div>
+        </div>
+        <div className={styles.infoCard}>
+          <IoMailOutline size={28} />
+          <div>
+            <h3>Email Us</h3>
+            <p>panacountryclub@gmail.com</p>
+          </div>
+        </div>
+        <a
+          href="https://www.facebook.com/pccpana"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.infoCard}
+        >
+          <IoLogoFacebook size={28} />
+          <div>
+            <h3>Follow Us</h3>
+            <p>@pccpana</p>
+          </div>
+        </a>
+      </div>
+
+      {/* Contact Form */}
+      <div className={styles.formContainer}>
+        <h2>Send Us a Message</h2>
+        <ContactForm />
+      </div>
     </main>
   );
 }

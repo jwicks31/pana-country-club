@@ -36,41 +36,169 @@
   transition: opacity 2s;
 }
 
-.scollText {
+.heroText {
+  z-index: 1;
+  transition: opacity 2s;
+  font-family: var(--font-antic-slab);
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--primary-color);
+  text-align: center;
+  line-height: 1.4;
+  max-width: 900px;
+  padding: 1.5rem 2.5rem;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.heroText span {
+  color: var(--accent-color);
+}
+
+/* Hero Quick Action Buttons */
+.heroActions {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.heroButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--font-raleway);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.heroButton:hover {
+  background-color: rgba(26, 26, 26, 0.95);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.heroButtonPrimary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent3-color));
+  border: none;
+  color: #1a1a1a;
+  font-family: var(--font-raleway);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.heroButtonPrimary:hover {
+  background: linear-gradient(135deg, var(--accent2-color), var(--accent-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+  color: #1a1a1a;
+}
+
+.scrollText {
   font-family: var(--font-raleway);
   position: absolute;
   width: 100vw;
   bottom: 0;
   left: 0;
   text-align: center;
-  color:var(--accent2-color);
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.25rem;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  backdrop-filter: blur(2px);
+}
+
+
+.scrollText span {
+  color: var(--accent-color);
+}
+
+.scrollText svg {
+  margin-top: 0.5rem;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6));
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
 }
 
 .descriptionContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.2rem;
-  max-width: var(--max-width);
-  border-top-width: 1px;
-  border-top-color: var(--primary-color);
-  border-top-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: var(--primary-color);
-  border-bottom-style: solid;
-  padding: 25px 100px;
-  margin-bottom: 6rem;
-  margin-top: 6rem;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 900px;
+  padding: 4rem 3rem;
+  margin: 5rem auto;
   width: 100%;
   z-index: 2;
   font-family: var(--font-antic-slab);
+  text-align: center;
+  color: var(--primary-color);
+  background-color: var(--background-complement-color-light);
+  border-radius: 8px;
+  position: relative;
+}
+
+.descriptionContainer::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent3-color));
+  border-radius: 2px;
+}
+
+.descriptionContainer p {
+  margin-top: 1.5rem;
 }
 
 .membershipContainer {
@@ -79,94 +207,115 @@
   flex-direction: column;
   justify-self: center;
   align-items: center;
-  background-color: var(--primary);
-  background: linear-gradient(to top right, rgb(107, 76, 41), rgba(122, 88, 49, 0.9), rgba(107, 76, 41, 1));
+  background: linear-gradient(135deg, rgb(87, 62, 35) 0%, rgb(122, 88, 49) 50%, rgb(87, 62, 35) 100%);
   color: var(--accent-color);
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.membershipContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/clouds.jpg');
+  background-repeat: repeat;
+  background-size: 400px;
+  opacity: 0.08;
+  z-index: 0;
 }
 
 .membershipContainer p {
-  padding: 2rem;
+  padding: 0;
   font-family: var(--font-raleway);
-  padding-top: 4rem;
   display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
   text-align: center;
-  height: 100%;
-}
-
-.membershipContainer p:after {
-  padding-bottom: 3rem;
-  border-bottom: 1px solid rgb(var(--background-start-rgb));
-  content: '';
-  display: block;
-  width: 15%;
+  position: relative;
+  z-index: 1;
 }
 
 .cloudImage {
   width: 100%;
+  max-width: 800px;
   position: relative;
   display: flex;
   flex-direction: column;
-}
-
-.cloudImage:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/clouds.jpg');
-  background-repeat: repeat;
-  background-size: contain;
-  opacity: 1;
-  z-index: -1; /* Set the z-index to position the background layer behind the content */
+  align-items: center;
+  z-index: 1;
 }
 
 .membershipButton {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
-  justify-self: flex-end;
-  padding: .75rem;
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
-  margin-bottom: 4rem;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent3-color));
+  border: none;
+  color: #1a1a1a;
+  font-family: var(--font-raleway);
+  font-weight: 700;
+  font-size: 0.95rem;
   text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.membershipButton:hover {
+  background: linear-gradient(135deg, var(--accent2-color), var(--accent-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+  color: #1a1a1a;
 }
 
 .membershipCountryClub {
-  display: block; 
+  display: block;
   position: relative;
-  font-size: 1.2rem;
-  align-self: flex-start;
-  font-weight: 200;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 3px;
   right: 0px;
   width: 100%;
   transition: right 2s;
-  color: #f4d16d;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 .belong {
-  display: block; 
+  display: block;
   position: relative;
-  font-size: 2.3rem;
+  font-size: 2.75rem;
   font-weight: 300;
-  margin-top: 2rem;
+  font-family: var(--font-antic-slab);
   left: 0px;
   width: 100%;
-  color: rgb(var(--background-start-rgb));
+  color: var(--primary-color);
   transition: left 2s;
+}
+
+.belong::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: var(--accent-color);
+  margin: 1.5rem auto 0;
 }
 
 .membershipImages {
   display: flex;
   width: 100%;
-  height: 324px;
+  height: 750px;
 }
 
 .membershipImage {
@@ -198,6 +347,54 @@
 }
 
 /* Mobile and Tablet */
+@media (max-width: 768px) {
+  .heroText {
+    font-size: 1.25rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.5rem;
+    max-width: 95%;
+    line-height: 1.5;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    gap: 0.6rem;
+    width: 90%;
+    max-width: 280px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .heroButton,
+  .heroButtonPrimary {
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .scrollText {
+    position: relative;
+    width: auto;
+    padding: 0.75rem 1.5rem;
+    margin-top: 7rem;
+    font-size: 0.7rem;
+  }
+
+  .imageContainer {
+    padding-top: 70px;
+  }
+
+  .imageLogo {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 1rem;
+  }
+}
+
 @media (max-width: 575px) {
   .membershipImages {
     flex-direction: column;
@@ -219,12 +416,18 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding-top: 70px;
   }
 
   .imageLogo {
     margin-top: 0rem;
-    margin-bottom: 6rem;
+    margin-bottom: 1.5rem;
     margin-left: 0.35rem;
+  }
+
+  .heroText {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
   .imageText {
@@ -232,54 +435,42 @@
   }
 
   .descriptionContainer {
-    flex-direction: column;
-    padding: 0px;
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-    border: none;
+    padding: 3rem 1.5rem;
+    margin: 3rem 1rem;
+    font-size: 1rem;
   }
 
-  .descriptionContainer a {
-    padding: 1rem;
-  }
-
-  .descriptionContainer p,
-  .descriptionContainer div {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  .descriptionContainer::before {
+    top: 1.5rem;
+    width: 40px;
   }
 
   .descriptionContainer p {
-    align-items: center;
-    padding: 3rem;
-    border-radius: 0;
-    border: none;
+    margin-top: 1rem;
   }
 
-  .descriptionContainer div {
-    align-items: flex-end;
-    pointer-events: none;
-    padding: 2rem;
-    height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
-    z-index: 1;
+  .membershipContainer {
+    padding: 3rem 1.5rem;
   }
 
   .membershipCountryClub {
-    white-space: nowrap;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
   }
 
   .belong {
-    white-space: nowrap;
+    font-size: 1.75rem;
   }
+
+  .belong::after {
+    width: 60px;
+    margin-top: 1rem;
+  }
+
   .membershipButton {
-    padding: .25rem;
-    margin: 1rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
   }
 }
 

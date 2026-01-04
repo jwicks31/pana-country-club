@@ -2,63 +2,328 @@
   font-family: var(--font-raleway);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 6rem 12rem;
-  padding-bottom: 2rem;
+  padding: 6rem 2rem 2rem;
   min-height: calc(100vh - 22rem);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.main p {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 1rem;
-}
-
-.main p span {
-  margin-bottom: .25rem;
-}
-
-.bold {
-  font-weight: 700;
-}
-
-.cartOptions {
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 2rem 0 3rem;
   width: 100%;
 }
 
-.cartOptions p {
-  margin: 1rem;
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--accent-color);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.heroSubtitle {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.applicationButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent3-color));
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.applicationButton:hover {
+  background: linear-gradient(135deg, var(--accent2-color), var(--accent-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+  color: #1a1a1a;
+}
+
+/* Section Styles */
+.section {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+/* Membership Cards Grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: var(--background-complement-color-light);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.cardFeatured {
+  border-color: var(--accent-color);
+}
+
+.cardBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--accent-color), var(--accent3-color));
+  color: #1a1a1a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+}
+
+.cardIcon {
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.price span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+.card p {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Discount Banner */
+.discountBanner {
+  background-color: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 0.95rem;
+}
+
+.discountBanner strong {
+  color: var(--accent-color);
+}
+
+/* Golf Cart Options */
+.cartGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.cartOption {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background-color: var(--background-complement-color-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.cartOption:hover {
+  transform: translateY(-2px);
+}
+
+.cartOption svg {
+  color: var(--accent-color);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.cartOption h4 {
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.cartPrice {
+  display: inline-block;
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.cartOption p {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* CTA Section */
+.ctaSection {
+  background: linear-gradient(to top right, rgb(107, 76, 41), rgba(122, 88, 49, 0.9), rgba(107, 76, 41, 1));
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.ctaSection h3 {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+.ctaSection p {
+  color: rgb(var(--background-start-rgb));
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent3-color));
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.ctaPrimary:hover {
+  background: linear-gradient(135deg, var(--accent2-color), var(--accent-color));
+  transform: translateY(-2px);
+  color: #1a1a1a;
+}
+
+.ctaSecondary {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.ctaSecondary:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Mobile and Tablet */
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
   .main {
-    padding: 1rem;
-    padding-top: 4rem;
-  }
-  
-  .main p {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
+    padding: 5rem 1rem 2rem;
   }
 
-  .main a {
-    padding-bottom: .75rem;
+  .hero h1 {
+    font-size: 1.8rem;
   }
-  
-  .membershipOptions {
-    display: flex;
+
+  .heroSubtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .applicationButton {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .cartGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaSection {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaButtons {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 
-  .cartOptions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .ctaPrimary,
+  .ctaSecondary {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
   }
 }

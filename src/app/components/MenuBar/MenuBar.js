@@ -2,68 +2,47 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import className from 'classnames';
 
 import styles from './MenuBar.module.css';
 
-const MenuBar = ({ openMenu = false, useScroll = true }) => {
+const MenuBar = ({ openMenu = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(openMenu);
-  const toggledOffRef = useRef(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const toggleMenu = useCallback(() => {
-    if (isMenuOpen && window.pageYOffset !== 0) {
-      toggledOffRef.current = true;
-    }
+  const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  }, [isMenuOpen]);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (
-        !toggledOffRef.current &&
-        window.pageYOffset >= window.innerHeight / 14
-      ) {
-        toggleMenu();
-      } else if (window.pageYOffset == 0) {
-        setIsMenuOpen(false);
-        toggledOffRef.current = false;
-      }
+      setIsScrolled(window.pageYOffset > 50);
     };
-    if (useScroll && window.matchMedia('(min-width: 875px)').matches) {
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (openMenu && window.matchMedia('(max-width: 875px)').matches) {
       setIsMenuOpen(false);
     }
-  }, [useScroll, openMenu]);
+  }, [openMenu]);
 
   const pathname = usePathname();
   const menuItems = [
     { name: 'Home', link: '/' },
     { name: 'About Us', link: '/about' },
     { name: 'Membership', link: '/membership' },
+    { name: 'Menu', link: '/menu' },
+    { name: 'Club Calendar', link: 'https://calendar.google.com/calendar/u/0/embed?src=panacountryclub@gmail.com&ctz=America/Chicago' },
     { name: 'Contact Us', link: '/contact' },
-    {
-      name: 'Club Calendar',
-      link: 'https://calendar.google.com/calendar/u/0/embed?src=panacountryclub@gmail.com&ctz=America/Chicago',
-    },
-    {
-      name: 'Men\'s League Info',
-      link: 'https://golf-outings.vercel.app/league/0a4edb35-4e00-4c6e-b672-c0028acda121',
-    },
   ];
 
   return (
-    <nav>
-      <div
-        className={className(styles.menubar, {
-          [styles.fixed]: !isMenuOpen,
-        })}
-      >
+    <nav className={className(styles.nav, { [styles.scrolled]: isScrolled })}>
+      {/* Desktop menu bar */}
+      <div className={styles.menubar}>
         <div className={styles.logo}>
           <Link href="/">
             <Image
@@ -75,9 +54,9 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
             />
           </Link>
         </div>
-        <div className={className(styles.menu, { [styles.open]: isMenuOpen })}>
+        <div className={styles.desktopMenu}>
           <ul>
-            {menuItems.map((item, i) => (
+            {menuItems.map((item) => (
               <li
                 key={item.name}
                 className={
@@ -91,17 +70,23 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
             ))}
           </ul>
         </div>
+        <Link href="/membership" className={styles.joinButton}>
+          Join Now
+        </Link>
       </div>
 
+      {/* Mobile header */}
       <div className={styles.mobileLogoBar} />
       <div className={styles.mobileLogo}>
-        <Image
-          src="/new-logo.png"
-          alt="Pana Country Club Logo"
-          width={68}
-          height={50}
-          priority
-        />
+        <Link href="/">
+          <Image
+            src="/new-logo.png"
+            alt="Pana Country Club Logo"
+            width={68}
+            height={50}
+            priority
+          />
+        </Link>
       </div>
       <div className={styles.hamburger} onClick={toggleMenu}>
         <div
@@ -119,6 +104,31 @@ const MenuBar = ({ openMenu = false, useScroll = true }) => {
             [styles.rotateUp]: isMenuOpen,
           })}
         ></div>
+      </div>
+
+      {/* Mobile menu dropdown */}
+      <div className={className(styles.mobileMenu, { [styles.open]: isMenuOpen })}>
+        <ul>
+          {menuItems.map((item) => (
+            <li
+              key={item.name}
+              className={
+                pathname === item.link
+                  ? styles.menuItemActive
+                  : styles.menuItem
+              }
+            >
+              <Link href={item.link} onClick={() => setIsMenuOpen(false)}>
+                {item.name}
+              </Link>
+            </li>
+          ))}
+          <li className={styles.mobileJoinItem}>
+            <Link href="/membership" className={styles.mobileJoinButton} onClick={() => setIsMenuOpen(false)}>
+              Join Now
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );
