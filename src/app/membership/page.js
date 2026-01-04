@@ -2,11 +2,9 @@
 import { MenuBar } from '../components/MenuBar/MenuBar';
 import styles from './page.module.css';
 import Link from 'next/link';
-import { IoDocumentTextOutline, IoPersonOutline, IoPeopleOutline, IoSchoolOutline, IoCarOutline, IoLocationOutline } from 'react-icons/io5';
+import { IoCreateOutline, IoDocumentTextOutline, IoPersonOutline, IoPeopleOutline, IoSchoolOutline, IoCarOutline, IoLocationOutline } from 'react-icons/io5';
 
 export default function MembershipPage() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <main className={styles.main}>
       <MenuBar openMenu={true} />
@@ -17,15 +15,21 @@ export default function MembershipPage() {
         <p className={styles.heroSubtitle}>
           Join our community and enjoy golf, dining, and social events with friends and family
         </p>
-        <a
-          href={encodeURIComponent('/Pana Country Club New Member Application 2026.pdf')}
-          className={styles.applicationButton}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <IoDocumentTextOutline size={24} />
-          <span>{currentYear} Membership Application</span>
-        </a>
+        <div className={styles.heroButtons}>
+          <Link href="/membership/apply" className={styles.applicationButton}>
+            <IoCreateOutline size={24} />
+            <span>Apply Online</span>
+          </Link>
+          <a
+            href="/Pana Country Club New Member Application 2026.pdf"
+            className={styles.pdfButton}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IoDocumentTextOutline size={20} />
+            <span>Download PDF</span>
+          </a>
+        </div>
       </div>
 
       {/* Membership Cards */}
@@ -124,16 +128,11 @@ export default function MembershipPage() {
       {/* CTA Section */}
       <div className={styles.ctaSection}>
         <h3>Ready to Join?</h3>
-        <p>Download the application or contact us to learn more and schedule a tour.</p>
+        <p>Apply online or contact us to learn more and schedule a tour.</p>
         <div className={styles.ctaButtons}>
-          <a
-            href={encodeURIComponent('/Pana Country Club New Member Application 2026.pdf')}
-            className={styles.ctaPrimary}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download Application
-          </a>
+          <Link href="/membership/apply" className={styles.ctaPrimary}>
+            Apply Now
+          </Link>
           <Link href="/contact" className={styles.ctaSecondary}>
             Contact Us
           </Link>
