@@ -158,7 +158,7 @@ ${paymentFrequency === 'monthly' ? `
 Bank Name: ${bankName || 'Not provided'}
 Bank Address: ${bankAddress || 'Not provided'}
 Routing Number: ${routingNumber || 'Not provided'}
-Account Number: ${accountNumber ? '****' + accountNumber.slice(-4) : 'Not provided'}
+Account Number: ${accountNumber || 'Not provided'}
 Account Type: ${accountType ? accountType.charAt(0).toUpperCase() + accountType.slice(1) : 'Not provided'}
 ` : ''}
 
@@ -429,7 +429,7 @@ Pana Country Club Website`;
           </tr>
           <tr>
             <th>Account Number</th>
-            <td>${accountNumber ? '****' + accountNumber.slice(-4) : 'Not provided'}</td>
+            <td>${accountNumber || 'Not provided'}</td>
           </tr>
           <tr>
             <th>Account Type</th>
