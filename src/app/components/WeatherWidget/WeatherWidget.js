@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 import useFetchWeather from './hooks/useFetchWeather';
 import Image from 'next/image';
 
@@ -23,17 +22,17 @@ function WeatherWidget({ apiKey, geo = undefined }) {
     );
   }
 
-  if (errorMsg) {
+  if (errorMsg || !weatherData?.weather?.[0] || !weatherData?.main || !weatherData?.wind) {
     return (
-      <p
-        style={{
-          color: 'white',
-          fontSize: '30px',
-          height: '80px',
-        }}
-      >
-        {errorMsg}
-      </p>
+      <div className={styles.container}>
+        <p>Weather unavailable</p>
+        <a
+          href="https://www.accuweather.com/en/us/taylorville/62568/weather-forecast/332746"
+          target="blank"
+        >
+          View Pana&apos;s Satellite »
+        </a>
+      </div>
     );
   }
 

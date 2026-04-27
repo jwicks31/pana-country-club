@@ -8,6 +8,11 @@ export default function useFetchWeather(
   const [state, setState] = useState({ error: null, data: null, loading: true });
   useEffect(() => {
     const fetchWeather = async () => {
+      if (!key) {
+        setState({ error: new Error('Weather currently unavailable'), data: null, loading: false });
+        return;
+      }
+
       const url =
         `${BASE_API_URL}` +
         `?lat=${lat}` +
@@ -17,16 +22,19 @@ export default function useFetchWeather(
       try {
         const response = await fetch(url);
         const result = await response.json();
-        setState({ data: result, loading: false });
+        if (!response.ok) {
+          throw new Error(result?.message || 'Weather currently unavailable');
+        }
+        setState({ data: result, error: null, loading: false });
       } catch (e) {
-        setState({ error: e, loading: false });
+        setState({ error: e, data: null, loading: false });
       }
     }
     fetchWeather();
   }, [key, lat, long]);
 
   const errorMsg =
-    state.data?.error?.message || state.error?.message;
+    state.data?.error?.message || state.data?.message || state.error?.message;
 
   const weatherData = state.data ? state.data : null;
 
