@@ -5,9 +5,9 @@ export const MEMBERSHIP_PRICES = {
     single: 1200,
     family: 1476,
   },
-  junior: {
-    single: 444,
-    family: 444,
+  youth: {
+    single: 300,
+    family: 300,
   },
 };
 
@@ -62,7 +62,9 @@ export function calculatePriceBreakdown(options) {
   // Apply either introductory or non-resident discount (mutually exclusive, both 50%)
   // Introductory applies to membership + cart options
   // Non-Resident only applies to membership (not cart options)
-  const introDiscount = introductoryDiscount ? subtotal * INTRODUCTORY_DISCOUNT : 0;
+  // Youth memberships do not qualify for the Introductory (New Membership) rate.
+  const introEligible = membershipType !== 'youth';
+  const introDiscount = introductoryDiscount && introEligible ? subtotal * INTRODUCTORY_DISCOUNT : 0;
   const nonResDiscount = nonResidentDiscount ? membershipAfterOutOfTown * NON_RESIDENT_DISCOUNT : 0;
   const annualTotal = subtotal - introDiscount - nonResDiscount;
 
@@ -78,7 +80,7 @@ export function calculatePriceBreakdown(options) {
     nonResDiscount,
     nonResidentDiscount,
     annualTotal,
-    membershipLabel: membershipType === 'full' ? 'Full' : 'Junior',
+    membershipLabel: membershipType === 'full' ? 'Full' : 'Youth',
     householdLabel: householdType === 'single' ? 'Individual' : 'Family',
   };
 }

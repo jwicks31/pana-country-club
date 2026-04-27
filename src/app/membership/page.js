@@ -169,18 +169,19 @@ export default function MembershipPage() {
 
           <button
             type="button"
-            className={`${styles.card} ${isCardSelected('junior', 'single') ? styles.cardSelected : ''}`}
-            onClick={() => selectMembership('junior', 'single')}
+            className={`${styles.card} ${isCardSelected('youth', 'single') ? styles.cardSelected : ''}`}
+            onClick={() => selectMembership('youth', 'single')}
           >
-            {isCardSelected('junior', 'single') && <IoCheckmarkCircle className={styles.cardCheck} size={24} />}
+            {isCardSelected('youth', 'single') && <IoCheckmarkCircle className={styles.cardCheck} size={24} />}
             <div className={styles.cardIcon}>
               <IoSchoolOutline size={32} />
             </div>
-            <h3>Junior Membership</h3>
-            <div className={styles.price}>${MEMBERSHIP_PRICES.junior.single.toLocaleString()}<span>/year</span></div>
+            <h3>Youth Membership</h3>
+            <div className={styles.price}>${MEMBERSHIP_PRICES.youth.single.toLocaleString()}<span>/year</span></div>
             <p>
-              For family members aged 18-21 enrolled in an accredited degree program.
-              Full access to all club facilities.
+              For youth members 17 and under. Children 12 and under must be
+              accompanied by an adult. Members aged 16 may add a rental cart with
+              proof of a valid driver&apos;s license (cart fees apply).
             </p>
           </button>
 

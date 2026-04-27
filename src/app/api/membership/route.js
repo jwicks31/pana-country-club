@@ -35,7 +35,7 @@ function getMembershipTypeLabel(type) {
   const labels = {
     full: 'Full Membership',
     introductory: 'Introductory Membership',
-    junior: 'Junior Membership',
+    youth: 'Youth Membership',
   };
   return labels[type] || type;
 }
