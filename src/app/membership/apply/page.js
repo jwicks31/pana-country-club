@@ -111,6 +111,12 @@ function MembershipApplicationContent() {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    if (formData.membershipType === 'youth' && formData.introductoryDiscount) {
+      setFormData((prev) => ({ ...prev, introductoryDiscount: false }));
+    }
+  }, [formData.membershipType, formData.introductoryDiscount]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -199,7 +205,7 @@ function MembershipApplicationContent() {
         </Link>
         <h1>Membership Application</h1>
         <p className={styles.subtitle}>
-          Full, Introductory, Family, &amp; Junior - {currentYear}
+          Full, Introductory, Family, &amp; Youth - {currentYear}
         </p>
         <p className={styles.intro}>
           The Pana Country Club was established to provide its members with the opportunity to play
@@ -228,11 +234,11 @@ function MembershipApplicationContent() {
               <input
                 type="radio"
                 name="membershipType"
-                value="junior"
-                checked={formData.membershipType === 'junior'}
+                value="youth"
+                checked={formData.membershipType === 'youth'}
                 onChange={handleChange}
               />
-              <span>Junior Membership</span>
+              <span>Youth Membership</span>
             </label>
           </div>
 
@@ -286,12 +292,15 @@ function MembershipApplicationContent() {
                     setFormData(prev => ({ ...prev, nonResidentDiscount: false }));
                   }
                 }}
-                disabled={formData.nonResidentDiscount}
+                disabled={formData.nonResidentDiscount || formData.membershipType === 'youth'}
               />
               <div className={styles.discountContent}>
                 <span className={styles.discountName}>Introductory Membership</span>
                 <span className={styles.discountValue}>50% off</span>
-                <p className={styles.discountDesc}>For first-time members (subject to approval)</p>
+                <p className={styles.discountDesc}>
+                  For first-time members (subject to approval).
+                  {formData.membershipType === 'youth' && ' Not available for Youth memberships.'}
+                </p>
               </div>
             </label>
             <label className={styles.discountOption}>
