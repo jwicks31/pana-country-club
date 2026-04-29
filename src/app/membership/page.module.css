@@ -534,6 +534,17 @@
   }
 }
 
+/* Tablet — clean 2-column grid in the awkward mid-range */
+@media (min-width: 769px) and (max-width: 1099px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cartGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Mobile and Tablet */
 @media (max-width: 768px) {
   .main {

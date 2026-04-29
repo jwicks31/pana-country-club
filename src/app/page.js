@@ -64,16 +64,6 @@ export default function Home() {
           width={400}
           priority
         />
-        <h1
-          className={className(styles.heroText, {
-            [styles.imageHidden]: removeImage,
-          })}
-        >
-          Discover the joy of golfing in a friendly,<br />
-          welcoming community at <span>Pana Country Club</span>.
-        </h1>
-        <Image src="/hole-7.jpg" alt="Pana Country Club Hole 7" fill priority />
-
         {/* Hero Quick Action Buttons */}
         <div className={styles.heroActions}>
           <Link href="/menu" className={styles.heroButton}>
@@ -92,6 +82,15 @@ export default function Home() {
             <span>Club Calendar</span>
           </Link>
         </div>
+        <h1
+          className={className(styles.heroText, {
+            [styles.imageHidden]: removeImage,
+          })}
+        >
+          Discover the joy of golfing in a friendly,<br />
+          welcoming community at <span>Pana Country Club</span>.
+        </h1>
+        <Image src="/hole-7.jpg" alt="Pana Country Club Hole 7" fill priority />
 
         <div className={styles.scrollText}>
           Scroll To Explore <AiOutlineArrowDown size={20} />
